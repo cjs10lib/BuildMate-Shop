@@ -1,0 +1,101 @@
+
+<mat-card>
+
+  <div class="spc-30"></div>
+
+  <mat-tab-group mat-stretch-tabs>
+
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon color="primary">verified_user</mat-icon> &nbsp;
+        Check Out (Select Staff)
+      </ng-template>
+    </mat-tab>
+
+  </mat-tab-group>
+
+  
+  <div class="spc-20"></div>
+
+  <!-- <pre>{{ checkOutDetails | json }}</pre> -->
+
+  <form #f="ngForm">
+
+    <div class="form-field-container">
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Select Staff</mat-label>
+        <input type="text" placeholder="Search..." aria-label="Number" matInput [formControl]="myControl" name="control" [matAutocomplete]="auto" [hidden]="myControl.value=='true'" required>
+        
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn.bind(this)">
+          <mat-option value="">--Select Staff--</mat-option>
+          <mat-divider></mat-divider>
+          <mat-option *ngFor="let p of filteredOptions | async" [value]="p.id">
+            {{p.names}}
+          </mat-option>
+        </mat-autocomplete>
+  
+        <mat-error>
+          Product is <strong>required</strong>
+        </mat-error>
+      </mat-form-field> 
+
+    </div>
+
+    <div class="spc-5"></div>
+    <h3 style="padding-bottom:0;"> Transaction Details</h3>
+
+    <mat-form-field appearance="outline">
+      <mat-select [(ngModel)]="checkOutTransactionInfo.transactionType" name="transactionType" (ngModelChange)="transactionOnChange($event)" required>
+        <mat-option>--Select Transaction Type--</mat-option>
+        <mat-option value="Cash">Cash</mat-option>
+        <mat-option value="Credit">Credit</mat-option>
+      </mat-select>
+      <mat-error>
+        Transaction type is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Amount Paid (Ghc)</mat-label>
+      <input type="number" matInput [(ngModel)]="checkOutTransactionInfo.amountPaid" 
+        name="amountPaid" placeholder="Enter Amount Paid" 
+        [disabled]="checkOutTransactionInfo.transactionType === 'Credit' || !checkOutTransactionInfo.transactionType">
+      <mat-icon matSuffix>moneytization_on</mat-icon>
+    </mat-form-field>
+
+    <div>
+      <p *ngIf="cart.length > 0">
+        Outstanding Bill -- {{ getOutStandingPayment() }}
+      </p>
+    </div>
+
+    <mat-action-row>
+      <button mat-raised-button type="button" color="primary" (click)="placeOrder()" [disabled]="!f.valid || cart.length < 1">Place Order</button>
+    </mat-action-row>
+  </form>
+  
+    <div class="spc-10"></div>
+  
+    <mat-accordion class="example-headers-align">
+            
+      <mat-expansion-panel expanded opened hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Cart Information
+          </mat-panel-title>
+          <mat-panel-description>
+            Product Details
+            <mat-icon>shopping_cart</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+  
+        <app-shopping-cart [hideControls]="hideControls"></app-shopping-cart>          
+                
+      </mat-expansion-panel>
+      
+    </mat-accordion>
+
+</mat-card>
+
+

@@ -1,0 +1,55 @@
+<mat-card mat-ripple (click)="productDetails()">
+  <img mat-card-image [src]="avatar" [alt]="product.pattern">
+  <!-- <img mat-card-image src="../../../assets/carousel/carousel2.jpg" alt=""> -->
+  <mat-card-content class="product-content text-center">
+    <h2 class="text-center">{{ product.pattern }}</h2>
+    
+    <div class="product-description">
+      <strong>Description</strong> <br>
+      <mat-divider></mat-divider>
+      <div class="spc-5"></div>
+      <span>
+        {{ product.description }}
+      </span>
+    </div>
+    
+    <!-- <div class="spc-5"></div>
+
+    <div class="product-size">
+      <strong>Size</strong> <br>
+      <mat-divider></mat-divider>
+      <div class="spc-5"></div>
+      <span>
+        70 / 7 ft <small>(-+ 1 ft)</small>
+      </span>
+    </div> -->
+
+    <div class="spc-10"></div>
+
+    <div class="product-price">
+      <span>GHC {{ product.unitPrice | number }}</span> <br>
+      <small>(Negociable)</small>
+    </div>
+
+    <div class="spc-10"></div>
+
+    <div class="text-center ">
+      <app-social-share-buttons matTooltip="Share on social media" [pageUrl]="pageUrl" [iconSize]="-4"></app-social-share-buttons>
+    </div>
+
+    <div class="spc-10"></div>
+  
+    <button *ngIf="!getProduct(); else removeFromCart" mat-raised-button color="primary" (click)="addToCart($event)">
+      <mat-icon>shopping_cart</mat-icon>
+      <span>Add To Cart</span> &nbsp;
+    </button>
+
+    <ng-template #removeFromCart>
+      <button mat-raised-button matTooltip="Click to remove item from cart"  color="primary" (click)="removeItemFromCart($event)">
+        <mat-icon>delete</mat-icon> &nbsp;
+        <span>Remove From Cart</span>
+      </button>
+    </ng-template>
+
+  </mat-card-content>
+</mat-card>

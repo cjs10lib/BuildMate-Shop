@@ -1,0 +1,54 @@
+
+<app-breadcrum *ngIf="showBreadcrum" [pageHeader]="pageHeader" [pageText]="pageText"></app-breadcrum>
+
+<div class="service-details">
+
+  <div class="page-contents">
+
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+  
+      <div class="gallery" fxFlex="50" fxFlexOrder="2">
+        <!-- <ng-container > -->
+          <mat-card *ngIf="service$ | async as service">
+            <img *ngIf="service?.avatar" mat-card-image [src]="getAvatarDetails(service?.avatar)" [alt]="service?.category">
+            
+            <mat-card-content class="desc">
+              <h2 class="text-center">{{ service?.category }}</h2>
+              <p>
+               {{ service?.description }}
+              </p>
+            </mat-card-content>
+          </mat-card>
+        <!-- </ng-container> -->
+      </div>
+  
+      <div class="service-categories" fxFlex="30" fxFlexOrder="1">
+
+        <!-- <ng-container ngIf="services$ | async as services"> -->
+          <mat-card>
+            <mat-nav-list>  
+    
+              <mat-list-item *ngFor="let service of services$ | async">
+                <a matLine routerLink="/service/{{ service.id }}" routerLinkActive="activated" >
+                  &nbsp; {{ service?.category }}
+                </a>
+                <mat-divider></mat-divider>
+              </mat-list-item>
+    
+            </mat-nav-list>
+          </mat-card>
+        <!-- </ng-container> -->
+  
+      </div>
+  
+    </div>  
+    
+    <div class="spc-20"></div>
+  
+    <app-product-list [showBreadcrum]="false"></app-product-list>
+
+  </div>
+
+</div>
+
+<app-footer></app-footer>

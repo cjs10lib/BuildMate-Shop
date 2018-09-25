@@ -1,0 +1,126 @@
+<form #f="ngForm"> 
+
+  <div class="spc-30"></div>
+
+  <div class="submit-button">
+    <button mat-button color="primary" matTooltip="Add Category" (click)="addCategory()"> 
+      <mat-icon>add</mat-icon> &nbsp;
+      <span>Add Category</span>
+    </button> &nbsp;
+
+    <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!f.valid"> 
+      <mat-icon>save</mat-icon> &nbsp;
+      <span>Save Record</span> 
+    </button> &nbsp;
+  </div> 
+
+  <div>
+
+    <mat-accordion class="example-headers-align">
+  
+      <mat-expansion-panel *ngIf="!productId" [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Image Upload
+          </mat-panel-title>
+          <mat-panel-description>
+            Upload Image
+            <mat-icon>cloud_upload</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-error style="text-align: center;" *ngIf="uploadError">
+          😢 Oh no! {{ uploadError }}
+        </mat-error>
+
+        <div class="spc-10"></div>
+  
+        <div class="image_upload">
+          <img class="profile-image" [src]="sanitizer.bypassSecurityTrustUrl(imageUrl)" style="width:250px;height:250px;" alt="">
+          <br>
+          
+          <div class="dropzone" 
+            appDropZone
+            (hovered)="toggleHover($event)"
+            (dropped)="onImageChange($event)"
+            [class.hovering]="isHovering">
+  
+            <!-- <h3>Drop Zone</h3> -->
+            <mat-icon>cloud_upload</mat-icon>
+            <!-- <input type="file" (change)="handleFileInput($event.target.files)"> -->
+            <input type="file" (change)="onImageChange($event)">
+          </div>
+      
+        </div>
+  
+        <mat-action-row>
+          <button mat-raised-button type="button" color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>
+  
+      </mat-expansion-panel>
+  
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Product Information
+          </mat-panel-title>
+          <mat-panel-description>
+            Primary Details
+            <mat-icon>assignment</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+  
+        <div class="form-field-container">
+
+          <mat-form-field appearance="outline">
+            <mat-label>Category</mat-label> 
+            <mat-select [(ngModel)]="product.category" name="category" placeholder="Enter product category" required>
+              <mat-option value=""></mat-option>
+              <mat-option *ngFor="let category of categories$ | async" [value]="category.id">
+                {{ category.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error>
+              Product category is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
+          <div class="spc-10"></div>
+
+          <mat-divider></mat-divider>
+
+          <div class="spc-10"></div>
+  
+          <mat-form-field>
+            <input matInput [(ngModel)]="product.pattern" name="pattern" placeholder="Pattern Number" required>
+            <mat-error>
+              Pattern number is <strong>required</strong>
+            </mat-error>       
+          </mat-form-field>
+
+          <mat-form-field>
+            <textarea matInput [(ngModel)]="product.description" name="description" #input maxlength="40" placeholder="Description"></textarea>
+            <mat-hint>Enter brief description of product</mat-hint>
+            <mat-hint align="end">{{input.value?.length || 0}}/40</mat-hint>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <input matInput [(ngModel)]="product.unitPrice" name="unitPrice" type="number" placeholder="Price" required>
+            <span matPrefix>Unit Price (Ghc)&nbsp;</span>
+            <mat-error>
+              Price is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>  
+        </div>
+           
+        <mat-action-row>
+          <button mat-raised-button type="button" (click)="prevStep()">Previous</button>
+          <button mat-raised-button type="button" color="primary" (click)="nextStep()">Finish</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+      
+    </mat-accordion>
+
+  </div>
+
+</form>

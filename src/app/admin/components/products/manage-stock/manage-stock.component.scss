@@ -1,0 +1,16 @@
+.form-field-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field-container > * {
+    width: 100%;
+}
+
+mat-card .pricing mat-form-field {
+    width: 25%;
+}
+
+mat-card-actions {
+    text-align: right;
+}

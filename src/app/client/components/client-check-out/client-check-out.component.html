@@ -1,0 +1,110 @@
+
+<div class="checkout">
+
+  <div class="page-contents">
+  
+    <div class="spc-30"></div>
+  
+    <mat-tab-group mat-stretch-tabs>
+  
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon color="primary">verified_user</mat-icon> &nbsp;
+          Check Out (Complete Details)
+        </ng-template>
+      </mat-tab>
+  
+    </mat-tab-group>
+  
+    
+    <div class="spc-20"></div>
+  
+    <!-- <pre>{{ checkOutTransactionInfo | json }}</pre> -->
+  
+    <form #f="ngForm">   
+  
+      <div *ngIf="!client?.phoneNumber">
+        Hello <strong>{{ client.displayName }}</strong>, <br> <br>
+        We noticed that you have not added your phone number to your information we collected from facebook. Kindly enter your primary contact phone number before proceeding. <br>
+  
+        <div class="spc-10"></div>
+  
+        <!-- pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" -->
+        <mat-form-field appearance="outline">
+          <mat-label>Phone Number</mat-label>
+          <input type="tel" matInput [(ngModel)]="checkOutTransactionInfo.phoneNumber" 
+            name="phoneNumber" #phone
+            placeholder="Eg. 024 123 4567" 
+            minlength="10" maxlength="10" required>
+          <mat-icon matSuffix>phone</mat-icon>    
+          <mat-hint align="end">{{phone.value?.length || 0}}/10</mat-hint>
+
+          <mat-error *ngIf="phone?.errors?.required">
+            Contact phone number is <strong>invalid</strong>
+          </mat-error>
+          <mat-error *ngIf="phone?.errors?.minlength">
+            Contact phone number should be at least <strong>10 digit of length</strong>
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline">
+          <mat-select [(ngModel)]="checkOutTransactionInfo.transactionStatus" name="transactionStatus" required disabled>
+            <mat-option>--Select Transaction Status--</mat-option>
+            <mat-option value="PENDING">PENDING</mat-option>
+            <mat-option value="PROCESSING">PROCESSING</mat-option>
+            <mat-option value="COPLETED">COPLETED</mat-option>
+          </mat-select>
+          <mat-error>
+            Transaction type is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </div>
+ 
+      <div class="spc-10"></div> 
+  
+      <div *ngIf="cart.length > 0">
+        Total Amount -- <strong>GHC {{ getOutStandingPayment() }}</strong> <br>
+
+        <div class="spc-5"></div>
+
+        <strong>Note:</strong> The total amount value below, 
+        is the sum of the unit-prices for each product 
+        (Sum the price of each product with quantity as 1). 
+        On supply, our professionals will determine each 
+        product quantity to suite your needs then actual 
+        price for each product is calculated.
+      </div>
+  
+      <mat-action-row>
+        <button mat-raised-button type="button" color="primary" (click)="placeOrder()" [disabled]="!f.valid || cart.length < 1">Place Order</button>
+      </mat-action-row>
+    </form>
+    
+      <div class="spc-10"></div>
+    
+      <mat-accordion class="example-headers-align">
+              
+        <mat-expansion-panel expanded opened hideToggle="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Cart Information
+            </mat-panel-title>
+            <mat-panel-description>
+              Product Details
+              <mat-icon>shopping_cart</mat-icon>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+  
+          <app-client-shopping-cart [hideControls]="true"></app-client-shopping-cart>
+    
+          <!-- <app-shopping-cart [hideControls]="true"></app-shopping-cart>           -->
+                  
+        </mat-expansion-panel>
+        
+      </mat-accordion>
+  
+  </div>
+
+</div>
+
+<app-footer></app-footer>

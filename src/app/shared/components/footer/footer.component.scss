@@ -1,0 +1,42 @@
+.footer {
+    background-image: url(../../../../assets/banners/banner1.jpg);
+    max-height: 900px;
+    padding: 30px;
+}
+
+.footer .notes {
+    padding-bottom: 80px;
+}
+
+.footer .category {
+    top: 0;
+    color: whitesmoke;
+}
+
+.footer .category h3 {
+    font-family: 'Catamaran';  
+    font-size: 25px;
+    font-weight: 400;
+}
+
+.footer .category .about-note {
+    color: rgba(202, 200, 200, 0.733);
+    font-family: 'Catamaran';  
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.brand {
+    background-image: url(../../../../assets/banners/banner1.jpg);
+}
+
+.brand2 {
+    background-image: url(../../../../assets/banners/banner1.jpg);
+    height: 50px;
+}
+
+.brand .title h2 {
+    color: whitesmoke;
+    font-family: 'Catamaran';  
+    font-weight: 400;
+}

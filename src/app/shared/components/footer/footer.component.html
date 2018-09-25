@@ -1,0 +1,58 @@
+<mat-card class="footer">
+  <div class="notes" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center stretch" fxLayoutGap="20px">
+
+    <!-- <div class="category" [style.height]="(isHandset$ | async) ? '0px' : '420px'" fxFlex="30"> -->
+    <div class="category" fxFlex="30">
+      <h3>About Us</h3>
+      <div class="about-note">
+        We are a design company with proffessional touch in out-door & indoor design, organisation and planing.
+        <div class="spc-10"></div>
+        <button mat-raised-button color="primary" routerLink="/contact-us">Contact Us</button>
+      </div>
+    </div>
+
+    <!-- <div class="category" [style.height]="(isHandset$ | async) ? '0px' :  '420px'" fxFlex="30"> -->
+    <div class="category" fxFlex="30">
+      <h3>Our Address</h3>
+      <div class="about-note">
+        GICEL estate block D2/20 
+        new weija SCC inside mallam 
+        Kasoa highway
+      </div>
+
+      <div class="spc-10"></div>
+
+      <h3>E-Mail Us</h3>
+      <div class="about-note">
+        mellenceconsult@gmail.com
+      </div>
+    </div>
+
+    <!-- <div class="category" [style.height]="(isHandset$ | async) ? '0px' :  '420px'" fxFlex="30"> -->
+    <div class="category" fxFlex="30">
+      <h3>Call Us</h3>
+      <div class="about-note">
+        0302907164, 0548911986
+      </div>
+    </div>
+
+  </div>
+
+</mat-card>
+<mat-card class="brand mat-elevation-z12">
+
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <div class="title">
+      <h2 [style.font-size]="(isHandset$ | async) ? '12px' :  '20px'">Powered By CYBOTECH CORP</h2>
+    </div>
+  
+    <div fxFlex></div>
+  
+    <div class="social-icons">
+      <app-social-share-buttons matTooltip="Share on social media" [pageUrl]="url" [iconSize]="-4" [count]="false"></app-social-share-buttons>
+    </div>
+  </div>
+
+</mat-card>
+
+<mat-card class="brand2"></mat-card>

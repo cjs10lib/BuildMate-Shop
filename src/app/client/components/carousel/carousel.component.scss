@@ -1,0 +1,140 @@
+
+.carousel-container {
+    background-color: #fff;
+}
+
+.carousel {  
+    
+    .content {
+        display: flex;
+        .item {
+            width: 100%;
+            // height: calc(100vh - 100px); 
+            display: block;
+            .img {
+                width: 100%;
+                height: 100%; 
+                display: block;
+                text-align: center;
+                background-size: cover;
+                background-position: center;
+                padding-bottom: 50%;
+
+                .verticle-center {
+                    padding-top: calc(5% + 100px);                    
+                    h2 {
+                        padding: 0;
+                        margin: 0;
+                        font-family: 'Catamaran';
+                        font-weight: 400;
+                        color: whitesmoke;
+                        text-align: center;
+                        text-transform: uppercase;
+                        text-shadow: 2px 2px 8px #111;
+                    }
+    
+                    div {
+                        font-family: 'Cormorant Garamond';
+                        font-weight: 100;
+                        font-style: italic;
+                        color: whitesmoke;
+                        text-align: center;
+                        text-shadow: 2px 2px 8px #111;
+                    }
+
+                    .mat-raised-button {
+                        line-height: 50px;
+                        border-radius: 40px;
+                        text-align: center;
+                        width: 200px;
+                        font-size: 20px; 
+                        text-shadow: 2px 2px 5px #000000;                   
+                    }
+                }
+
+                .verticle-center:last-child {
+                    font-size: 28px;
+                    font-weight: 400;
+                    color: whitesmoke;
+                }
+
+            }
+        }
+    }
+    .item {
+        width: 100%;
+        display: block;
+        .img {
+        width: 100%;
+        display: block;
+        background-size: cover;
+        background-position: center;
+        height: 0;
+        padding-bottom: 50%;
+        }
+    }
+    .ball {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: black;
+        border: 2px solid;
+        opacity: 0.5;
+        &.visible {
+        opacity: 1;
+        }
+    }
+    &.transition {
+        transition: all .4s ease-in-out;
+    }
+    .progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: #ff5252;
+    }
+    .click-area {
+        width: 50px;
+        text-align: center;
+        i {
+            font-size: 3em;
+        }
+    }
+}
+
+
+.link-container {
+    .content {
+      display: flex;
+    }
+    .item {
+      width: 100%;
+      display: block;
+      .img {
+        width: 100%;
+        display: block;
+        background-size: cover;
+        background-position: center;
+        height: 0;
+        padding-bottom: 100%;
+      }
+      a {
+        padding: 1em 1em;
+        padding-bottom: 5px;
+        position: relative;
+        white-space: nowrap;
+        background: pink;
+      }
+    }
+  }
+  
+  img,
+  a {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }

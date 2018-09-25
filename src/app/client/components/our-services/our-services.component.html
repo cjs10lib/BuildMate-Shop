@@ -1,0 +1,33 @@
+
+<app-breadcrum *ngIf="showBreadcrum" [pageHeader]="pageHeader" [pageText]="pageText"></app-breadcrum>
+
+<div class="our-services">
+
+    <div class="page-contents">
+
+        <div class="spc-10"></div>
+    
+        <div *ngIf="!showBreadcrum" class="category-header text-center">
+            <h1>Our Services</h1>
+        </div>
+    
+        <div class="spc-10"></div>
+    
+        <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center">
+    
+            <div *ngFor="let service of services$ | async" fxFlex="33" class="gallery text-center">
+                <mat-card mat-ripple routerLink="/service/{{ service.id }}">
+                    <img *ngIf="service?.avatar" mat-card-image [src]="getAvatarDetails(service?.avatar)" [alt]="service?.category">
+                    <mat-card-content class="desc text-center" style="margin-bottom: 0;">
+                        <h2 fxFlex>{{ service?.category }}</h2>                   
+                    </mat-card-content>
+                </mat-card>
+            </div>
+    
+        </div>
+
+    </div>
+
+</div>
+
+<app-footer *ngIf="showBreadcrum"></app-footer>

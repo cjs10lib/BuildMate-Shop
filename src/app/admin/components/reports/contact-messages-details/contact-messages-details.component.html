@@ -1,0 +1,32 @@
+
+<div>
+  <h1>{{ data?.name }}</h1>
+  <span> <strong>Subject</strong> -- {{ data?.subject }}</span> &nbsp;
+  <span>({{ data?.created.toDate() | date: 'longDate' }})</span>
+
+  <div class="spc-10"></div>
+  <h3>Message</h3>
+  <mat-divider></mat-divider>
+  <div>{{ data?.message }}</div>
+
+  <div class="spc-10"></div>
+
+  <h3>Contacts</h3>
+  <mat-divider></mat-divider>
+
+  <mat-nav-list>
+    <mat-list-item>
+      <mat-icon color="primary" matListIcon>phone</mat-icon> 
+      <span matLine>{{ data?.phone }}</span>      
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon color="primary" matListIcon>email</mat-icon> 
+      <span matLine>{{ data?.email }}</span>      
+    </mat-list-item>
+  </mat-nav-list>
+  <div>
+    
+  <mat-card-actions style="text-align: right;">
+    <button mat-raised-button color="primary" mat-dialog-close>Close</button>
+  </mat-card-actions>
+</div>

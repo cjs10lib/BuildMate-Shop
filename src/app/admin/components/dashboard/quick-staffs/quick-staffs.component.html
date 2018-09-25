@@ -1,0 +1,42 @@
+<div class="form-field-container">
+          
+  <div>
+
+    <table mat-table [dataSource]="dataSource" matSort>
+          
+      <!-- Product Column -->
+      <ng-container matColumnDef="avatar">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+        <td mat-cell *matCellDef="let row"> 
+          <!-- <img class="product-img" src="../../../../assets/avatars/avatar3.png" alt="">  -->
+          <img class="staff-img" matListAvatar src="{{getAvatarDetails(row.avatar)}}" alt="">
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+  
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="staff">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Staff </th>
+        <td mat-cell *matCellDef="let row"> {{ row.staff }} </td>
+      </ng-container>
+
+      <!-- Total Price Column -->
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+        <td mat-cell *matCellDef="let row"> {{ row.phone }} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+    </table>
+
+    <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>  
+  </div>
+
+  <ng-template #noImageAvatar>
+    <img matListAvatar class="product-img" src="../../../../assets/avatars/avatar3.png" alt="..."> &nbsp; &nbsp;
+  </ng-template>
+
+</div>

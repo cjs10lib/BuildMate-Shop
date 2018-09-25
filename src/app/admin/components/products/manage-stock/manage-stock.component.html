@@ -1,0 +1,140 @@
+
+
+<!-- <mat-card> -->
+
+  <div class="spc-30"></div>
+
+  <!-- <pre>{{ newStock | json }}</pre> -->
+
+  <form #f="ngForm">
+
+    <div class="form-field-container">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Supplied Date</mat-label>
+        <span matPrefix> <mat-icon>date_range</mat-icon> &nbsp; </span>
+        
+        <input matInput [matDatepicker]="picker" [(ngModel)]="newStock.supplied" name="suppliedDate" placeholder="Select Date"
+          (dateChange)="givingDateEvent($event)" disabled required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker touchUi="true" disabled="false"></mat-datepicker>
+        
+        <mat-hint>Giving Date Format: mm/dd/yyyy</mat-hint>
+        <mat-hint align="end">Click toggle button to select date!</mat-hint>
+
+        <mat-error>
+          A valid <strong>Giving Date</strong> is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <div class="spc-5"></div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Select Product</mat-label>
+        <input type="text" placeholder="Search..." aria-label="Number" matInput [formControl]="myControl" name="control" [matAutocomplete]="auto" [hidden]="myControl.value=='true'" required>
+        
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn.bind(this)">
+          <mat-option value="">--Select Product--</mat-option>
+          <mat-divider></mat-divider>
+          <mat-option *ngFor="let p of filteredOptions | async" [value]="p.id">
+            {{p.pattern}}
+          </mat-option>
+        </mat-autocomplete>
+
+        <mat-error>
+          Product is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>      
+
+    </div>
+
+    <div class="spc-10"></div>
+
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+
+      <div fxFlex fxShow.lt-sm="false" fxShow="true" fxFlexOrder.xs="1">
+        <mat-card> 
+
+          <mat-card-actions>
+            <!-- <button type="button" mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!f.valid">Add Record</button> -->
+            <button type="button" mat-raised-button color="primary" (click)="onSubmit()">Add Record</button>
+          </mat-card-actions> 
+          
+          <div class="pricing"> 
+            
+            <mat-form-field appearance="outline">
+              <mat-label>Product QTY</mat-label>
+              <input type="number" matInput [(ngModel)]="newStock.quantity" name="quantity" placeholder="Quantity" required>
+              <mat-error>
+                Quantity is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Unit Cost Price</mat-label>
+              <input type="number" matInput [(ngModel)]="newStock.unitCostPrice" name="unitCostPrice" placeholder="Unit Cost Price" required>
+              <mat-icon matPrefix>attach_money</mat-icon>
+              <mat-error>
+                Unit cost price is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Unit Sale Price</mat-label>
+              <input type="number" matInput [(ngModel)]="newStock.unitSalePrice" name="unitSalePrice" placeholder="Unit Sale Price" required>
+              <mat-icon matPrefix>attach_money</mat-icon>
+              <mat-error>
+                Unit sale price is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Invoice</mat-label>
+              <input matInput [(ngModel)]="newStock.invoice" name="invoice" placeholder="Invoice Number">
+              <mat-icon matPrefix>event_note</mat-icon>
+              <mat-hint>Invoice Number</mat-hint>
+            </mat-form-field>
+
+            <!-- <button type="button" mat-icon-button color="warn" (click)="resetInput()">
+              <mat-icon>cancel</mat-icon>
+            </button> -->
+
+            <div class="spc-10"></div>
+    
+            <mat-divider></mat-divider> 
+            
+            <mat-list>
+              <mat-list-item *ngFor="let item of stockProducts">
+                <h3 matLine *ngIf="!productId"> 
+                  <strong>{{ getProductDetails(item.product) }}</strong>  
+                </h3>
+                <p matLine>
+                  <span> Quantity <strong>{{ item?.quantity | number}}</strong> </span> <br>
+                  <span class="demo-2"> Supplied Date -- {{ item?.supplied?.toDate() | date:'longDate' }} </span>
+                </p>      
+                <p matLine>                
+                  <span> Cost Price (Ghc) -- <strong>{{ item?.unitCostPrice | number }}</strong></span> &nbsp;
+                  Sale Price (Ghc) --<strong> {{ item?.unitSalePrice | number }}</strong> 
+                </p>
+                
+                <button type="button" mat-icon-button color="warn" matTooltip="delete record" (click)="deleteStockRecord(item)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+
+                <mat-divider></mat-divider> 
+              </mat-list-item>
+            </mat-list>           
+
+          </div>    
+        </mat-card>   
+      </div>
+
+      <div fxShow.lt-sm="true" fxShow="false">
+        <h3 mat-subheader> Sorry! You can only enter new stocks from a larger display :(</h3>
+      </div>
+    
+    </div>
+
+  </form>
+
+<!-- </mat-card> -->

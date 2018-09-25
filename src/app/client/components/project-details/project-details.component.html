@@ -1,0 +1,47 @@
+
+<app-breadcrum *ngIf="showBreadcrum" [pageHeader]="pageHeader" [pageText]="pageText"></app-breadcrum>
+
+<div class="project-details">
+
+  <div class="page-contents">
+
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+  
+      <div class="projects" fxFlex="30" fxFlexOrder.xs="1">
+        <mat-card>
+          <mat-nav-list>   
+
+            <mat-list-item *ngFor="let project of projects$ | async">
+              <a matLine routerLink="/project/{{ project.id }}" routerLinkActive="activated" >
+                &nbsp; {{ project?.name }}
+              </a>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+  
+          </mat-nav-list>
+        </mat-card>
+      </div>
+  
+      <div class="gallery" fxFlex="60"  fxFlexOrder.xs="2">
+        <mat-card *ngIf="project$ | async as project">
+          <img *ngIf="project?.avatar" mat-card-image [src]="getAvatarDetails(project?.avatar)" [alt]="project?.category">        
+          
+          <mat-card-content class="desc">
+            <h2 class="text-center">{{ project?.name }}</h2>
+            <p>
+             {{ project?.description }}
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </div>   
+  
+    </div>  
+    
+    <div class="spc-20"></div>
+  
+    <app-product-list [showBreadcrum]="false"></app-product-list>
+
+  </div>
+
+
+</div>

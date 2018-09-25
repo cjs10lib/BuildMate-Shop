@@ -1,0 +1,15 @@
+<mat-form-field appearance="outline">
+  <mat-label>Enter quantity</mat-label>
+  <input type="number" 
+    matInput #qty ngModel 
+    name="qty" (keydown)="check($event, qty.value)"
+    placeholder="Quantity" required>
+  <mat-hint>Product quantity</mat-hint>
+  <mat-error>
+    Product quantity is <strong>required</strong>
+  </mat-error>
+</mat-form-field>
+
+<mat-card-actions>
+  <button mat-raised-button color="primary" [mat-dialog-close]="qty.value">Update Quantity</button>
+</mat-card-actions>

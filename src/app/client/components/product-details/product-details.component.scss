@@ -1,0 +1,43 @@
+
+.product-details {
+    background-color: whitesmoke;
+    width: 100%;
+}
+
+.page-contents {
+    background-color: white;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+    overflow: auto;
+}
+
+.gallery img {
+    height: auto;
+}
+
+h2 {
+    font-family: 'Catamaran';  
+    font-weight: 200;
+    font-size: 40px;
+    text-transform: uppercase;
+    color: #111;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+article {
+    strong {
+        font-family: 'Catamaran';
+        font-weight: 200;
+        font-size: 25px;
+        text-transform: uppercase;
+        color: #111;
+    }
+    .description {
+        font-family: 'Catamaran';  
+        font-weight: 240;
+        font-size: 20px;
+        color: #111;
+    }
+}

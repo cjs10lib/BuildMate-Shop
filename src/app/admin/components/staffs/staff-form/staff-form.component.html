@@ -1,0 +1,165 @@
+<form #f="ngForm"> 
+
+  <div class="spc-30"></div>
+
+  <div class="submit-button">
+    <button mat-raised-button color="primary" (click)="onSubmit()"> 
+    <!-- <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!f.valid">  -->
+      <mat-icon>save</mat-icon> 
+      <span>Save Record</span> 
+    </button>    
+  </div>
+
+  <div>
+
+    <mat-accordion class="example-headers-align">
+  
+      <mat-expansion-panel *ngIf="!staffId" [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Image Upload
+          </mat-panel-title>
+          <mat-panel-description>
+            Upload Image
+            <mat-icon>cloud_upload</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+  
+        <div class="image_upload">
+          <img class="profile-image" [src]="sanitizer.bypassSecurityTrustUrl(imageUrl)" style="width:250px;height:250px;" alt="">
+          <br>
+          
+          <div class="dropzone" 
+            appDropZone
+            (hovered)="toggleHover($event)"
+            (dropped)="onImageChange($event)"
+            [class.hovering]="isHovering">
+  
+            <!-- <h3>Drop Zone</h3> -->
+            <mat-icon>cloud_upload</mat-icon>
+            <input type="file" (change)="onImageChange($event)">
+          </div>
+      
+        </div>
+  
+        <mat-action-row>
+          <button mat-raised-button type="button" color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>
+  
+      </mat-expansion-panel>
+  
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Bio Info
+          </mat-panel-title>
+          <mat-panel-description>
+            Primary Details
+            <mat-icon>account_circle</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+  
+        <div class="form-field-container">
+    
+          <mat-form-field>
+            <input matInput [(ngModel)]="staff.names" name="names" placeholder="Names" required>
+            <mat-hint>Surname, Firstname & Othernames if any</mat-hint>
+            
+            <mat-error>
+              Names are <strong>required</strong>
+            </mat-error>
+          </mat-form-field>       
+  
+          <mat-form-field>
+            <input matInput [(ngModel)]="staff.nick" name="nick" placeholder="Nick-name" required>
+            <mat-error>
+                Nick name is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <mat-select [(ngModel)]="staff.gender" name="gender" placeholder="Gender" required>
+              <mat-option value=""></mat-option>
+              <mat-option value="Male">Male</mat-option>
+              <mat-option value="Female">Female</mat-option>
+            </mat-select>
+            <mat-error>
+              Gender is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <!-- <span matSuffix> <mat-icon>date_range</mat-icon> &nbsp; </span> -->
+            <input matInput [matDatepicker]="DOB" [(ngModel)]="staff.dob" name="dob" placeholder="Date Of Birth" required disabled>
+            <mat-datepicker-toggle matPrefix [for]="DOB"></mat-datepicker-toggle>
+            <mat-datepicker-toggle matSuffix [for]="DOB"></mat-datepicker-toggle>
+            <mat-datepicker #DOB touchUi="true" disabled="false"></mat-datepicker>
+            <mat-hint>Birth Date Format: mm/dd/yyyy</mat-hint>
+            <mat-hint align="end">Click toggle button to select date!</mat-hint>
+  
+            <mat-error>
+              A valid <strong>Date of Birth</strong> is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>  
+  
+        </div>            
+        <mat-action-row>
+          <button mat-raised-button type="button" (click)="prevStep()">Previous</button>
+          <button mat-raised-button type="button" color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+      
+      <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Contact
+          </mat-panel-title>
+          <mat-panel-description>
+            Contact Details
+            <mat-icon>perm_contact_calendar</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+    
+        <div class="form-field-container">
+  
+          <mat-form-field>
+            <span matPrefix> <mat-icon>phone</mat-icon> &nbsp; </span>
+            <input matInput type="tel" [(ngModel)]="staff.contact.phone" name="phone" placeholder="Mobile Phone" required>
+            <mat-hint>With country code if international!</mat-hint>
+            
+            <mat-error>
+              Mobile phone number is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field>
+            <span matPrefix> <mat-icon>phone_iphone</mat-icon> &nbsp; </span>
+            <input matInput type="tel" [(ngModel)]="staff.contact.otherPhones" name="otherPhones" placeholder="Other Phone(s)">
+          </mat-form-field>
+    
+          <mat-form-field>
+            <span matPrefix> <mat-icon>email</mat-icon> &nbsp; </span>
+            <input matInput type="email" [(ngModel)]="staff.contact.email" name="email" placeholder="Email Address">
+          </mat-form-field>              
+              
+          <mat-form-field>
+            <span matPrefix> <mat-icon>location_on</mat-icon> &nbsp; </span>
+            <textarea matInput [(ngModel)]="staff.contact.address" name="address" placeholder="Residential address" required></textarea>
+            
+            <mat-error>
+              Residential address is <strong>required</strong>
+            </mat-error>
+          </mat-form-field> 
+  
+        </div>            
+    
+        <mat-action-row>
+          <button mat-raised-button type="button" (click)="prevStep()">Previous</button>
+          <button mat-raised-button type="button" color="primary" (click)="nextStep()">Finish</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    
+    </mat-accordion>
+
+  </div>
+</form>

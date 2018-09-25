@@ -1,0 +1,60 @@
+
+.contact-us {
+    background-color: whitesmoke;
+    width: 100%;
+}
+
+.page-contents {
+    background-color: white;
+    padding: 20px;
+    max-width: 1200px;
+    margin: auto;
+    overflow: auto;
+}
+
+.contact-form {
+    background-color: whitesmoke;
+    padding: 30px;
+}
+
+.contact-form h2 {
+    font-family: 'Catamaran';  
+    font-weight: 200;
+    font-size: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #111;
+}
+
+.contact-form p {
+    font-family: 'Cormorant Garamond';  
+    font-weight: 200;
+    font-size: 28px;
+    color: #111;
+}
+
+.contact-form .form-fields {
+    display: flex;
+    flex-direction: column;
+
+    mat-form-field > * {
+        width: 100%;
+    }
+}
+
+.details-image mat-card mat-card-content h2 {
+    font-family: 'Catamaran';  
+    font-weight: 200;
+    font-size: 30px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #111;
+}
+
+.details-image mat-card mat-card-content article {
+    font-family: 'Cormorant Garamond';  
+    font-weight: 400;
+    font-size: 25px;
+    padding: 20px;
+    color: #111;
+}

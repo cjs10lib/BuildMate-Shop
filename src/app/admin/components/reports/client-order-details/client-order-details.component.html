@@ -1,0 +1,116 @@
+
+<!-- <mat-card> -->
+
+  <div class="spc-30"></div>
+  
+  <h1 mat-header style=" display:inline-block;">{{ getClientDetails(clientOrder?.transactionDetails?.person) }}</h1> &nbsp;
+  <span>({{ clientOrder?.datePlaced?.toDate() | date: 'longDate' }})</span>
+    
+  <form #f="ngForm">
+    <div class="form-field-container">
+      <div class="spc-5"></div>
+      <h3 style="padding-bottom:0;"> Transaction Details</h3>
+    
+      <mat-form-field appearance="outline">
+        <mat-label>Amount Paid (Ghc)</mat-label>
+        <input type="number" matInput [(ngModel)]="processOrder.amountPaid" 
+          name="amountPaid" #input placeholder="Enter Amount Paid"
+          (keydown)="check($event, input.value)"
+          [disabled]="processOrder.transactionStatus === 'COMPLETED' || !processOrder.transactionStatus">
+          <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+        <mat-icon matSuffix>moneytization_on</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout>
+      <div *ngIf="clientOrder?.items?.length > 0 && clientOrder?.transactionDetails?.balance">
+        Outstanding Bill -- <strong>GHC {{ getOutStandingPayment() }}</strong> 
+      </div>
+
+      <div fxFlex></div> 
+
+      <mat-chip-list>
+        <mat-chip  *ngIf="processOrder?.transactionStatus === 'PENDING'" color="warn" selected>{{ processOrder?.transactionStatus }}</mat-chip>
+        <mat-chip  *ngIf="processOrder?.transactionStatus === 'PROCESSING'" color="accent" selected>{{ processOrder?.transactionStatus }}</mat-chip>
+        <mat-chip *ngIf="processOrder?.transactionStatus === 'COMPLETED'" color="primary" selected>{{ processOrder?.transactionStatus }}</mat-chip>
+      </mat-chip-list>
+    </div>
+  </form>
+
+  <!-- <mat-divider></mat-divider> -->
+
+  <div class="spc-10"></div>
+
+  <div fxLayout="row">
+    <mat-action-row>
+      <button mat-raised-button type="button" color="primary" (click)="completeOrder()" [disabled]="!f.valid || !data || (clientOrder?.transactionDetails?.balance && getOutStandingPayment() !== 0)">Process Order</button>
+    </mat-action-row>
+
+    <div fxFlex></div>
+
+    <p>Placed order for {{ clientOrder?.items?.length }} item(s).</p>
+  </div>
+
+  <div class="container mat-elevation-z8">
+          
+    <table mat-table [dataSource]="dataSource" matSort>
+          
+      <!-- Product Column -->
+      <ng-container matColumnDef="product">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Product </th>
+        <td mat-cell *matCellDef="let row"> {{ row.product }} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+  
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>  </th>
+        <td mat-cell *matCellDef="let row"> 
+          <!-- {{ row.quantity | number }}  -->
+          <button [disabled]="processOrder?.transactionStatus === 'COMPLETED'" mat-raised-button color="primary" (click)="addQuantity($event, row.id)">Add Quantity</button>
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+        <td mat-cell *matCellDef="let row"> 
+          {{ row.quantity | number }} 
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+  
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="unitPrice">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Unit Price </th>
+        <td mat-cell *matCellDef="let row"> {{ row.unitPrice | number }} </td>
+        <td mat-footer-cell *matFooterCellDef> Total (GHC)</td>
+      </ng-container>
+
+      <!-- Total Price Column -->
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+        <td mat-cell *matCellDef="let row"> {{row.total | number}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{ getTotalCost() | number }} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    </table>
+
+    <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>      
+    
+  </div>
+  <!-- <mat-card *ngIf="!hideControls" class="mat-elevation-z2">
+    <button *ngIf="cart.length > 0 " mat-raised-button color="primary" routerLink="/account/check-out">Check Out</button> &nbsp;
+    <button *ngIf="cart.length > 0" mat-button color="warn" (click)="clearCart()">Clear Transaction Cart</button>
+  </mat-card>
+
+  <ng-template #noImageAvatar>
+    <img matListAvatar class="product-img" src="../../../../assets/avatars/avatar3.png" alt="..."> &nbsp; &nbsp;
+  </ng-template> -->
+<!-- </mat-card> -->

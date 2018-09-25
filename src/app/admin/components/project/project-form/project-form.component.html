@@ -1,0 +1,104 @@
+<form #f="ngForm"> 
+
+  <div class="spc-30"></div>
+
+  <div class="submit-button">
+    <button *ngIf="projectId" mat-raised-button color="warn" (click)="onDelete()"> 
+      <mat-icon>delete</mat-icon> &nbsp;
+      <span>Delete Record</span> 
+    </button> &nbsp;
+
+    <button *ngIf="!projectId" mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!f.valid"> 
+      <mat-icon>save</mat-icon> &nbsp;
+      <span>Save Record</span> 
+    </button> &nbsp;
+  </div> 
+
+  <div>
+
+    <mat-accordion class="example-headers-align">
+  
+      <mat-expansion-panel *ngIf="!projectId" [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Image Upload
+          </mat-panel-title>
+          <mat-panel-description>
+            Upload Image
+            <mat-icon>cloud_upload</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-error style="text-align: center;" *ngIf="uploadError">
+          😢 Oh no! {{ uploadError }}
+        </mat-error>
+
+        <div class="spc-10"></div>
+  
+        <div class="image_upload">
+          <img class="profile-image" [src]="sanitizer.bypassSecurityTrustUrl(imageUrl)" style="width:250px;height:250px;" alt="">
+          <br>
+          
+          <div class="dropzone" 
+            appDropZone
+            (hovered)="toggleHover($event)"
+            (dropped)="onImageChange($event)"
+            [class.hovering]="isHovering">
+  
+            <!-- <h3>Drop Zone</h3> -->
+            <mat-icon>cloud_upload</mat-icon>
+            <!-- <input type="file" (change)="handleFileInput($event.target.files)"> -->
+            <input type="file" (change)="onImageChange($event)">
+          </div>
+      
+        </div>
+  
+        <mat-action-row>
+          <button mat-raised-button type="button" color="primary" (click)="nextStep()">Next</button>
+        </mat-action-row>
+  
+      </mat-expansion-panel>
+  
+      <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Project Information
+          </mat-panel-title>
+          <mat-panel-description>
+            Primary Details
+            <mat-icon>assignment</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+  
+        <div class="form-field-container">
+          <div class="spc-10"></div>
+  
+          <mat-form-field>
+            <input matInput [(ngModel)]="project.name" #name name="projectName" maxlength="30" placeholder="Project Name" required>
+            <mat-hint align="end">{{name.value?.length || 0}}/30</mat-hint>
+            <mat-error>
+              Project name is <strong>required</strong>
+            </mat-error>       
+          </mat-form-field>
+
+          <mat-form-field>
+            <textarea matInput [(ngModel)]="project.description" name="description" #input maxlength="500" placeholder="Description"></textarea>
+            <mat-hint>Enter brief description of project</mat-hint>
+            <mat-hint align="end">{{input.value?.length || 0}}/500</mat-hint>
+            <mat-error>
+              Description is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+            
+        <mat-action-row>
+          <button mat-raised-button type="button" (click)="prevStep()">Previous</button>
+          <button mat-raised-button type="button" color="primary" (click)="nextStep()">Finish</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+      
+    </mat-accordion>
+
+  </div>
+
+</form>

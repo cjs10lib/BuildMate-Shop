@@ -1,0 +1,40 @@
+
+.mat-card-content>:first-child {
+    margin: 0;
+}
+
+.profile-title {
+    text-align: center;
+
+    h1 {
+        margin: 0;
+        padding: 0;
+    }
+
+    h3 {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.profile-actions {
+    text-align: center;
+    // max-width: 50px;
+}
+
+.mat-card-image {
+    max-height: 500px;
+}
+
+// .profile-nav .mat-list .mat-list-item, .mat-nav-list .mat-list-item, .mat-selection-list .mat-list-item {
+//     font-size: 20px;
+//     display: block;
+//     height: 48px;
+
+//     .matListIcon {
+//         font-size: 24px;
+//     }
+
+// }
+
+

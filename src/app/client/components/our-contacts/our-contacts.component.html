@@ -1,0 +1,111 @@
+
+<app-breadcrum *ngIf="showBreadcrum" [pageHeader]="pageHeader" [pageText]="pageText"></app-breadcrum>
+
+<div class="contact-us">
+  <div class="page-contents" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center" fxLayoutGap="20px">
+    <div fxFlex="50" fxFlexOrder.xs="2" class="contact-form">
+      <h2>Get In Touch with Us</h2>
+      <p>Please complete the form below. We'll do everything we can to respond to you as quickly as possible.</p>
+
+      <form #f="ngForm">
+
+        <div class="form-fields" fxLayoutGap="20px">
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="contact.name" name="contactName" placeholder="Name" required>
+            <mat-icon matSuffix>person</mat-icon>
+            <mat-error>
+              Your fullname is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]="contact.email" name="email" placeholder="Email" required>
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error>
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Subject</mat-label>
+            <input matInput [(ngModel)]="contact.subject" name="subject" placeholder="Subject">
+            <mat-icon matSuffix>language</mat-icon>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Phone</mat-label>
+            <input type="number" [(ngModel)]="contact.phone" name="phone" matInput placeholder="Phone" required>
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-error>
+              Contact phone number is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field appearance="outline">
+            <mat-label>Message</mat-label>
+            <textarea matInput [(ngModel)]="contact.message" name="message" cols="30" rows="10" placeholder="Message" required></textarea>
+            <mat-error>
+              Message is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-card-actions style="text-align: center;">
+            <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!f.valid">
+              <span>Submit</span> &nbsp;
+              <mat-icon>send</mat-icon>
+            </button>
+          </mat-card-actions>
+        </div>
+
+
+      </form>
+
+    </div>
+
+    <div fxFlex="50" fxFlexOrder.xs="1">
+      <div class="details-image">
+        <mat-card>
+          <!-- <img mat-card-image src="../../../assets/logo/logo-lg.jpg" alt="..."> -->
+          <img mat-card-image src="../../../assets/carousel/carousel6.jpg" alt="...">
+
+          <mat-card-content>
+            <h2>Mellence Impressions</h2>
+            <article>
+              <mat-icon color="primary">location_on</mat-icon> &nbsp;
+              <strong>Address</strong>
+              <mat-divider></mat-divider> <br>
+              <div class="spc-5"></div>
+
+              GICEL estate block D2/20 
+              new weija SCC inside mallam 
+              Kasoa highway
+            </article>
+
+            <article>
+              <mat-icon color="primary">phone</mat-icon> &nbsp;
+              <strong>Contact Phones</strong>
+              <mat-divider></mat-divider> <br>
+              <div class="spc-5"></div>
+              
+              <strong>0302907164, 0548911986</strong> 
+            </article>
+
+            <article>
+              <mat-icon color="primary">mail</mat-icon> &nbsp;
+              <strong>Email</strong>
+              <mat-divider></mat-divider> <br>
+              <div class="spc-5"></div>
+
+              <strong>mellenceconsult@gmail.com</strong> 
+            </article>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<app-footer></app-footer>

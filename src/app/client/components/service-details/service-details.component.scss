@@ -1,0 +1,81 @@
+
+.service-details {
+    background-color: whitesmoke;
+    width: 100%;
+}
+
+.page-contents {
+    background-color: white;
+    padding: 20px 0;
+    max-width: 1200px;
+    margin: auto;
+    overflow: auto;
+}
+
+.gallery {
+    padding: 20px;
+}
+
+.gallery img {
+    height: auto;
+}
+
+.mat-card-image:first-child {
+    margin-bottom: 0;
+}
+
+.desc {
+    padding: 15px;
+}
+
+.desc h2 {   
+    font-family: 'Catamaran';  
+    font-weight: 200;
+    font-size: 30px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #111;
+}  
+
+.desc p {
+    margin-top: 0;
+    font-size: 20px;
+    color: #111;
+}  
+
+.service-categories {
+    width: 100%;
+}
+
+.service-categories mat-card {
+    padding: 0;    
+}
+  
+mat-nav-list {
+    padding: 0;
+    width: 100%;
+    background-color: whitesmoke;
+}
+
+mat-list-item {
+    height: 60px;                    
+}
+
+mat-list-item a {
+    font-family: 'Catamaran';  
+    font-weight: 400;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #111;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.activated {
+    color: #3f51b5!important;
+    border-left: 5px solid #3f51b5!important;
+}
+
+.text-center {
+    text-align: center;
+}

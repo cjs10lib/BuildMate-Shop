@@ -1,0 +1,81 @@
+
+.why-choose-us {
+    background-color: white;
+    padding: 20px 0;
+}
+
+.choose-block {
+    margin-bottom: 30px;
+    padding: 10px;
+    width: 300px;
+    display: inline-block;
+
+    .card-image {
+    //    height: 100px;
+       padding: 20px;
+
+        .mat-card-image {
+            height: 100%;
+            width: 50%;
+            margin: 0;
+        }
+    }
+
+    .choose-content {
+        h2 {
+            font-family: 'Catamaran';  
+            font-weight: 200;
+            font-size: 22px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            color: #111;
+        }
+
+        p {
+            margin-top: 0;
+            font-family: 'Cormorant Garamond';  
+            font-weight: 400;
+            font-size: 22px;
+            color: #111;
+        }
+    }
+}
+
+.category-header {
+    h1 {
+        font-family: 'Catamaran';  
+        font-weight: 200;
+        font-size: 50px;
+        text-transform: uppercase;
+        color: #111;
+    }
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+// mat-card:hover {
+//     background:rgba(0,0,0,.04);
+// }
+
+// .mat-card .last-child {
+//     margin-bottom: 0;
+// }
+
+.all-projects {
+
+    text-align: center;
+    padding: 0 0 20px 0;
+
+    .mat-raised-button {
+        line-height: 50px;
+        border-radius: 40px;
+        text-align: center;
+        width: 200px;
+        font-size: 20px;     
+        // background-color: #131313;
+        color: whitesmoke;               
+    }
+}

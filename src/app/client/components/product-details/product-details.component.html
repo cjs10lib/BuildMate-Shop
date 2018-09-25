@@ -1,0 +1,90 @@
+<!-- <app-breadcrum *ngIf="showBreadcrum" [pageHeader]="pageHeader" [pageText]="pageText"></app-breadcrum> -->
+
+<div class="product-details">
+
+  <div class="page-contents">
+    
+    <div fxHide.xs class="spc-20"></div>
+  
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="50px" fxLayoutGap.xs="20px">
+  
+      <div fxHide.xs fxFlex="5"></div>
+  
+      <ng-container *ngIf="gallery.length > 0 && product">
+  
+        <div fxFlex="40">
+          <app-carousel [showControls]="false" [gallery]="gallery"></app-carousel>      
+        </div>    
+  
+        <div fxFlex="40">          
+          <h2>{{ product.pattern }}</h2>
+          <article>
+            <div class="product-description">
+              <strong>Description</strong> <br>
+              <mat-divider></mat-divider>
+              <div class="spc-5"></div>
+              <span class="description">
+                {{ product.description }}
+              </span>
+            </div>
+
+            <div class="spc-10"></div>
+  
+            <div class="product-size">
+              <strong>Size</strong> <br>
+              <mat-divider></mat-divider>
+              <div class="spc-5"></div>
+              <span>
+                70 / 7 ft <small>(-+ 1 ft)</small>
+              </span>
+            </div>
+  
+            <div class="spc-10"></div>  
+
+            <app-social-share-buttons matTooltip="Share on social media" [pageUrl]="pageUrl" [iconSize]="4"></app-social-share-buttons>
+              
+            <mat-divider></mat-divider>
+
+            <div class="spc-5"></div>
+  
+            <div class="actions">
+              <div fxFlex="70">
+                <strong>GHC {{ product.unitPrice | number }}</strong> &nbsp;
+                <small>(Negociable)</small>
+              </div>
+    
+              <div fxFlex>
+                <button *ngIf="!getProduct(); else removeFromCart" mat-raised-button color="primary" (click)="addToCart($event)">
+                  <mat-icon>shopping_cart</mat-icon>
+                  <span>Add To Cart</span> &nbsp;
+                </button>
+            
+                <ng-template #removeFromCart>
+                  <button mat-raised-button matTooltip="Click to remove item from cart"  color="primary" (click)="removeItemFromCart($event)">
+                    <mat-icon>delete</mat-icon> &nbsp;
+                    <span>Remove From Cart</span>
+                  </button>
+                </ng-template>
+              </div>
+            </div>
+  
+            <div class="spc-20"></div>
+  
+          </article>
+        </div>
+  
+      </ng-container>
+  
+  
+    </div>
+  
+    <div fxHide.xs class="spc-30"></div>
+  
+    <app-product-list [showBreadcrum]="false"></app-product-list>
+
+  </div>
+
+
+</div>
+
+<app-footer></app-footer>

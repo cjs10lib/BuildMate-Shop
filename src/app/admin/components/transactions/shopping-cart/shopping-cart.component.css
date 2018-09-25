@@ -1,0 +1,22 @@
+.form-field-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field-container > * {
+    width: 98%;
+}
+ 
+.add-batch {
+    text-align: right;
+    margin: 10px;
+}
+  
+td, th {
+    width: 35%;
+}
+
+.product-img {
+    width: 100px;
+    border-radius: 20px;
+}

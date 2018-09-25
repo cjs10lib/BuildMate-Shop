@@ -1,0 +1,63 @@
+<div class="form-field-container">
+          
+  <div class="mat-elevation-z8" *ngIf="componentToShow === 'order-remit-table'">
+
+    <table mat-table [dataSource]="dataSource" matSort>
+          
+      <!-- Product Column -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+        <td mat-cell *matCellDef="let row"> {{ row.date.toDate() | date: 'mediumDate' }} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+  
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="transactionType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Transaction </th>
+        <td mat-cell *matCellDef="let row"> {{ row.transactionType }} </td>
+        <td mat-footer-cell *matFooterCellDef> Total (GHC)</td>
+      </ng-container>
+
+      <!-- Total Price Column -->
+      <ng-container matColumnDef="paid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Paid (Ghc) </th>
+        <td mat-cell *matCellDef="let row"> {{row.paid | number}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{ getPaidTotalCost() | number }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="balance">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Balance (Ghc) </th>
+        <td mat-cell *matCellDef="let row"> {{row.balance | number}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{ getBalanceTotalCost() | number }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+        <td mat-cell *matCellDef="let row"> 
+          <button mat-raised-button color="primary" (click)="showRemitForm(row.orderRecord)">Remit Order</button>
+        </td>
+        <td mat-footer-cell *matFooterCellDef>  </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    </table>
+
+    <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+  
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>  
+    
+  </div> 
+
+
+  <!-- Form -->
+  <div *ngIf="componentToShow === 'remit-form'" class="remit-form">
+
+    <app-remit-form [staffOrder]="staffOrder"></app-remit-form>
+    
+  </div>
+
+
+</div>
+  

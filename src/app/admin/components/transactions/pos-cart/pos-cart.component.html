@@ -1,0 +1,39 @@
+<mat-card class="product-card">
+  <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+  <img *ngIf="product?.avatar && galleryFiles.length > 0" mat-card-image [src]="getAvatarDetails()" [alt]="product.pattern">
+  <mat-card-content>
+
+    <div class="profile-title">
+      <h1 mat-header>{{ product?.pattern }}</h1>
+      <h3>{{ getCategorDetails(product?.category) }}</h3>
+      <p>{{ product?.description }}</p>
+      <h1 mat-header>Ghc {{ product?.unitPrice }}</h1>
+    </div>
+
+    <div class="spc-5"></div>
+
+    <!-- <div class="profile-actions"> -->
+    <div class="profile-actions">
+
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+        
+        <div fxFlex fxFlexOrder.xs="1">
+          <p *ngIf="productQty">({{ productQty }} &nbsp; in cart)</p>
+          <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+
+          <!-- <div class="spc-5"></div> -->
+
+          <button mat-raised-button color="primary" (click)="removeFromCart()">-</button>
+          <button mat-raised-button color="primary" (click)="addToCart()">+</button>
+        </div>
+
+      </div>  
+
+      <mat-card-actions>
+        <button mat-button color="warn" (click)="deleteFromCart()">Remove Item From Cart</button>
+      </mat-card-actions>
+
+    </div>
+  </mat-card-content>
+  
+</mat-card>  

@@ -1,0 +1,75 @@
+
+<mat-card>
+
+  <div class="spc-30"></div>
+  
+  <h1 mat-header>Client Orders Registry</h1>
+  
+  <p>You have {{ clientOrders.length }} transaction records in your registry.</p>
+
+  <div class="example-container mat-elevation-z8">
+          
+    <table mat-table [dataSource]="dataSource" matSort>
+          
+      <ng-container matColumnDef="client">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Client </th>
+        <td mat-cell *matCellDef="let row"> {{ getClientDetails(row.client) }} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+        <td mat-cell *matCellDef="let row"> {{ row.date.toDate() | date: 'mediumDate' }} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let row">           
+          <mat-chip-list>
+            <mat-chip *ngIf="row.status === 'COMPLETED'" (click)="processTransaction(row.id)" color="primary" selected>{{ row.status }}</mat-chip>
+            <mat-chip *ngIf="row.status === 'PROCESSING'" (click)="processTransaction(row.id)" color="accent" selected>{{ row.status }}</mat-chip>
+            <mat-chip *ngIf="row.status === 'PENDING'" (click)="processTransaction(row.id)" color="warn" selected>{{ row.status }}</mat-chip>
+          </mat-chip-list>
+        </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+  
+      <ng-container matColumnDef="phone">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone </th>
+        <td mat-cell *matCellDef="let row"> {{ row.phone }} </td>
+        <td mat-footer-cell *matFooterCellDef>Total (GHC)</td>
+      </ng-container>
+
+      <ng-container matColumnDef="paid">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Paid </th>
+        <td mat-cell *matCellDef="let row"> {{ row.paid | number }} </td>
+        <td mat-footer-cell *matFooterCellDef> {{ getTotalPaid() | number }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="balance">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Balance </th>
+        <td mat-cell *matCellDef="let row"> {{ row.balance | number }} </td>
+        <td mat-footer-cell *matFooterCellDef> {{ getTotalBalance() | number }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>  </th>
+        <td mat-cell *matCellDef="let row"> 
+          <button *ngIf="row.status !== 'COMPLETED'" mat-raised-button color="primary" (click)="processTransaction(row.id)">Process</button>
+        </td>
+        <td mat-footer-cell *matFooterCellDef> </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    </table>
+
+    <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>      
+    
+  </div>
+    
+</mat-card>

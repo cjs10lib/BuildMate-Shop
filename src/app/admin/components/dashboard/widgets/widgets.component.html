@@ -1,0 +1,55 @@
+<div fxLayout="row" fxLayout.xs="column" fxLayoutGap="10px">
+
+  <div fxFlex="25" fxFlexOrder.xs="1">
+
+      <mat-card class="widgets">
+        <span mat-header>Total Sales</span>
+        
+        <mat-card-content>
+            <h1 class="widget-value">{{ saleTotal?.total || 0 }}</h1>
+            <pre>Monthly</pre>
+        </mat-card-content>
+      </mat-card>
+
+  </div>
+
+  <div fxFlex="25" fxFlexOrder.xs="2">
+
+    <mat-card class="widgets"> 
+        <span mat-header>Orders</span>
+
+        <mat-card-content>
+            <h1 class="widget-value">{{ orderTotal?.total || 0 }}</h1>
+            <pre>Monthly</pre>
+        </mat-card-content>
+    </mat-card>
+
+  </div>
+
+  <div fxFlex="25" fxFlexOrder.xs="3">
+
+    <mat-card class="widgets">       
+        <span mat-header>In-Stock</span>
+    
+        <mat-card-content>
+            <h1 class="widget-value">{{ stockTotal || 0 }}</h1>
+            <pre>General</pre>
+        </mat-card-content>
+    </mat-card>
+
+  </div>
+
+  <div fxFlex="25" fxFlexOrder.xs="4">
+
+    <mat-card class="widgets">
+        <span mat-header>Staff(s)</span>
+
+        <mat-card-content>
+            <h1 class="widget-value">{{ staffTotal | number }}</h1>
+            <pre>General</pre>
+        </mat-card-content>
+    </mat-card>
+
+  </div>
+
+</div>

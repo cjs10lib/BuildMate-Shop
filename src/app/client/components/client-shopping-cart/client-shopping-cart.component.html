@@ -1,0 +1,77 @@
+<div class="shopping-cart">
+
+  <div class="page-contents">
+  
+    <div *ngIf="!hideControls" class="spc-30"></div>
+    
+    <h1 *ngIf="!hideControls" mat-header>Shopping Cart</h1>
+    
+    <p>You have {{ getTotalItemCount() }} item(s) in your cart.</p>
+  
+    <div class="form-field-container mat-elevation-z8">
+            
+      <table mat-table [dataSource]="dataSource" matSort>
+            
+        <!-- Product Column -->
+        <ng-container matColumnDef="image">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td mat-cell *matCellDef="let row"> 
+            <!-- <img class="product-img" src="../../../../assets/avatars/avatar3.png" alt="">  -->
+            <img class="product-img" matListAvatar src="{{getAvatarDetails(row.avatar)}}" alt="">
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+  
+        <!-- Product Column -->
+        <ng-container matColumnDef="product">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> &nbsp; &nbsp;
+            <span fxShow.gt-xs fxHide.xs>Pattern</span>  
+          </th>
+          <td mat-cell *matCellDef="let row"> &nbsp; &nbsp; 
+            <span fxShow.gt-xs fxHide.xs>{{ getProductDetails(row.product) }}</span>   
+          </td>
+          <td mat-footer-cell *matFooterCellDef> 
+            <span fxShow.gt-xs fxHide.xs></span> 
+          </td>
+        </ng-container>
+    
+        <!-- Quantity Column -->
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> <span fxShow.gt-xs fxHide.xs>Qauntity</span> </th>
+          <td mat-cell *matCellDef="let row"> <span fxShow.gt-xs fxHide.xs>{{ row.quantity | number }}</span> </td>
+          <td mat-footer-cell *matFooterCellDef> <span fxShow.gt-xs fxHide.xs>Total (GHC)</span> </td>
+        </ng-container>
+  
+        <!-- Total Price Column -->
+        <ng-container matColumnDef="total">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Total (GHC) </th>
+          <td mat-cell *matCellDef="let row"> {{row.total | number}} </td>
+          <td mat-footer-cell *matFooterCellDef> 
+            {{ getTotalCost() | number }} 
+          </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+      </table>
+  
+      <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+    
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>      
+      
+    </div>
+    <mat-card *ngIf="!hideControls" class="mat-elevation-z2">
+      <button *ngIf="cart.length > 0 " mat-raised-button color="primary" routerLink="/check-out">Check Out</button> &nbsp;
+      <button *ngIf="cart.length > 0" mat-button color="warn" (click)="clearCart()">Clear Transaction Cart</button>
+    </mat-card>
+  
+    <ng-template #noImageAvatar>
+      <img matListAvatar class="product-img" src="../../../../assets/avatars/avatar3.png" alt="..."> &nbsp; &nbsp;
+    </ng-template>
+
+  </div>
+
+</div>
+
+<app-footer *ngIf="!hideControls"></app-footer>

@@ -1,0 +1,154 @@
+<mat-toolbar color="primary" class="main-nav mat-elevation-z5">     
+
+    <!-- for large displays -->
+    <mat-toolbar-row fxHide.xs fxShow.gt-xs>
+        <div>
+            <a mat-button class="header-brand-lg" routerLink="/" routerLinkActive="activated-lg">
+                MELLENCE &nbsp; <small fxHide.sm>IMPRESSIONS</small>
+            </a>
+        </div>
+        
+        <div fxFlex fxLayout fxLayoutAlign="flex-end">
+
+            <ng-container *ngIf="clientCart | async as cart">
+                <a mat-icon-button *ngIf="getCartItemTotal(cart) > 0" class="cart-lg" routerLink="/shopping-cart">
+                <!-- <a mat-icon-button *ngIf="getCartItemTotal(cart) > 0" class="cart-lg" href="/shopping-cart" routerLinkActive="activated-lg"> -->
+                    <mat-icon [matBadge]="getCartItemTotal(cart)" matBadgeColor="accent">shopping_cart</mat-icon>
+                </a>
+            </ng-container>
+
+            <a mat-button class="nav-links-lg" routerLink="/products" routerLinkActive="activated-lg">Products</a>    
+            <a mat-button class="nav-links-lg" routerLink="/service-list" routerLinkActive="activated-lg">Services</a>    
+            <a mat-button class="nav-links-lg" routerLink="/projects" routerLinkActive="activated-lg">Portfolio</a>    
+            <a mat-button class="nav-links-lg" routerLink="/contact-us" routerLinkActive="activated-lg">Contact</a> 
+                        
+            <img *ngIf="authProviderData?.photoURL" [src]="authProviderData?.photoURL" [matMenuTriggerFor]="menu" class="avatar-lg" [alt]="authProviderData?.displayName"/>  
+            
+            <button mat-icon-button *ngIf="!authProviderData?.photoURL" [matMenuTriggerFor]="menu" class="account-menu-lg">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngIf="authProviderData && authProviderData?.providerId === 'password'; else anonymousUser" routerLink="/account/dashboard">
+                    <mat-icon>dashboard</mat-icon>
+                    <span>Dashboard</span>
+                </button>
+                <!-- <button mat-menu-item routerLink="/contact-us">
+                    <mat-icon>phone</mat-icon>
+                    <span>Contact Us</span>
+                </button> -->
+            </mat-menu>            
+            <!-- <a mat-button *ngIf="auth.user$ | async; else anonymousUser_lg" class="nav-links-lg" routerLink="/account/dashboard" [class.activated]="currentUrl == '/account/dashboard'">Dashboard</a>            -->
+        </div>   
+    </mat-toolbar-row>
+
+    
+    <ng-template #anonymousUser>
+        <button mat-menu-item routerLink="/auth/login">
+            <mat-icon>lock</mat-icon>
+            <span>Login To Dashboard</span>
+        </button>
+        <mat-divider></mat-divider>
+    </ng-template>
+
+    <!-- for small displays -->
+    <mat-toolbar-row fxHide.gt-xs>
+        <div fxFlexAlign="center" class="header-brand">
+            <a mat-button class="header-brand-sm" routerLink="/">
+                MELLENCE 
+            </a> <br>
+            <!-- <span style="font-size: 16px;">IMPRESSIONS</span> -->
+        </div>
+
+        <div class="cart-count">
+            <ng-container *ngIf="clientCart | async as cart">
+                <!-- <button mat-icon-button *ngIf="getCartItemTotal(cart) > 0" routerLink="/shopping-cart"> -->
+                <button mat-icon-button *ngIf="getCartItemTotal(cart) > 0" routerLink="/shopping-cart">
+                    <mat-icon [matBadge]="getCartItemTotal(cart)" matBadgeColor="accent">shopping_cart</mat-icon>
+                </button>
+            </ng-container>
+        </div>
+    </mat-toolbar-row>
+    
+    <mat-toolbar-row class="nav-links mat-elevation-z12" fxLayoutAlign="center" fxHide.gt-xs>        
+        <a mat-button class="nav-links-sm" routerLink="/products" routerLinkActive="activated-sm">Products</a>    
+        <a mat-button class="nav-links-sm" routerLink="/service-list" routerLinkActive="activated-sm">Services</a>    
+        <a mat-button class="nav-links-sm" routerLink="/projects" routerLinkActive="activated-sm">Portfolio</a>    
+        <!-- <a mat-button class="nav-links-sm" routerLink="/contact-us" routerLinkActive="activated-sm">Contact</a>   -->
+
+        <div fxLayout="row">
+            <img *ngIf="authProviderData?.photoURL" [src]="authProviderData?.photoURL" [matMenuTriggerFor]="menu" class="avatar-sm" [alt]="authProviderData?.displayName"/>  
+            
+            <button mat-icon-button *ngIf="!authProviderData?.photoURL" [matMenuTriggerFor]="menu" class="nav-links-sm">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngIf="authProviderData && authProviderData?.providerId === 'password'; else anonymousUser" routerLink="/account/dashboard">
+                    <mat-icon>dashboard</mat-icon>
+                    <span>Dashboard</span>
+                </button>
+                <button mat-menu-item routerLink="/contact-us">
+                    <mat-icon>phone</mat-icon>
+                    <span>Contact Us</span>
+                </button>
+                <button mat-menu-item *ngIf="authProviderData?.providerId" (click)="signOut()">
+                    <mat-icon>arrow_back</mat-icon>
+                    <span>Log-Out</span>
+                </button>
+            </mat-menu>
+        </div>
+        
+        <!-- <a mat-button *ngIf="auth.user$ | async; else anonymousUser_sm" class="nav-links-sm" routerLink="/account/dashboard" [class.activated]="currentUrl == '/account/dashboard'">Dashboard</a>   -->
+    </mat-toolbar-row>
+    
+</mat-toolbar>
+
+<!-- <perfect-scrollbar [ngStyle]="{'min-height': clientHeight + 'px', 'margin-bottom': '-650px'}" [config]="config"> -->
+<perfect-scrollbar>
+    <div>
+        <router-outlet></router-outlet> 
+    </div>
+
+    <!-- <div style="height: 650px;"></div>  -->
+</perfect-scrollbar> 
+
+<!-- <footer class="footer">
+
+    <div class="footer-contacts" fxLayout="row" fxLayout.xs="column" fxLayoutAlign="center center">
+
+        <div fxFlex="50" class="footer-notes">
+            <h2>About Us</h2>
+            <p>
+                Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
+                Totam, exercitationem dolores optio, vel omnis adipisci.
+            </p>
+        </div>
+        
+        <div fxFlex="50" class="footer-notes">
+            <h2>Our Address</h2>
+            <p>
+                1309 Roosevelt Wilson Lane 
+                Colton, CA 92325
+            </p>
+
+            <h2 fxHide.xs>Email Us</h2>
+            <p>
+                info@yourwebsitedomain.com
+            </p>
+
+            <h2 fxHide.xs>Call Us</h2>
+            <p>
+                180-874-5234,
+                180-752-3957
+            </p>
+        </div>
+        
+
+    </div>
+
+    <div fxLayout fxHide.lt-sm class="branding mat-elevation-z5">
+        <span>Powered By CYBOTECH CORP</span>
+    </div>
+
+</footer>  -->
+
+

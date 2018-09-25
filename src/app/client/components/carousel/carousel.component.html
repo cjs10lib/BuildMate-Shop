@@ -1,0 +1,93 @@
+<div class="carousel-container">
+
+  <ngx-hm-carousel
+    *ngIf="gallery.length > 0"
+    [(ngModel)]="index"
+    (ngModelChange)="indexChanged($event)"
+    [autoplay-speed]="10000"
+    [autoplay]="autoplay"
+    [autoplay-direction]="direction"
+    [infinite]="infinite"
+    [align]="left"
+    [between-delay]="2000"
+    class="carousel c-accent">
+  
+    <section ngx-hm-carousel-container class="content">
+      <article class="item cursor-pointer"
+        *ngFor="let avatar of gallery"
+        [style.height]="showControls ? 'calc(100vh - 100px)' : '400px'"
+        ngx-hm-carousel-item>
+        <div class="img"
+          [style.backgroundImage]="'url('+avatar?.url+')'"
+          [style.backgroundPosition]="'bottom'"
+          [style.backgroundSize]="'cover'">
+  
+          <div class="verticle-center" *ngIf="showControls">          
+            <h2 [style.font-size]="(isHandset$ | async) ? '40px' : '50px'">Mellence Impressions</h2>
+            <!-- <h1>With specialty in;</h1>  -->
+            <div [style.font-size]="(isHandset$ | async) ? '20px' : '28px'">
+              Speciality in: <br>
+              3D Wall Papers, Panels Sales & Installation <br> 
+              3D Epoxy Flooring 
+            </div>      
+            
+            <div class="spc-10"></div>
+  
+            <button mat-raised-button color="primary">
+              <span>Read More</span> &nbsp;
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+  
+      </article>
+    </section>
+  
+    <ng-template #carouselPrev *ngIf="!showControls && gallery.length > 1">
+      <div class="click-area">
+        <i class="material-icons">keyboard_arrow_left</i>
+      </div>
+    </ng-template>
+    <ng-template #carouselNext *ngIf="!showControls && gallery.length > 1">
+      <div class="click-area">
+        <i class="material-icons">keyboard_arrow_right</i>
+      </div>
+    </ng-template>
+  
+    <ng-template #carouselDot let-model>
+      <div class="ball bg-accent"
+        [class.visible]="model.index === model.currentIndex"></div>
+    </ng-template>
+  
+    <ng-template #carouselProgress let-progress *ngIf="gallery.length > 1">
+      <div class="progress" *ngIf="progress > 0"
+      [style.width]="(direction==='right' ? progress : 100 - progress) + '%'"></div>
+    </ng-template>
+  
+  </ngx-hm-carousel>
+
+  <div *ngIf="!showControls">
+    <ngx-hm-carousel
+      (ngModelChange)="change($event)"
+      align="center"
+      show-num="auto"
+      [drag-many]="true"
+      class="link-container">
+      <section ngx-hm-carousel-container class="content">
+        <article class="item cursor-pointer t-al-c"
+          *ngFor="let avatar of gallery"
+          ngx-hm-carousel-item>
+          <div class="img"
+            [style.backgroundImage]="'url('+avatar.url+')'">
+          </div>
+        </article>
+      </section>
+    </ngx-hm-carousel>
+
+  </div>
+
+
+</div>
+
+
+

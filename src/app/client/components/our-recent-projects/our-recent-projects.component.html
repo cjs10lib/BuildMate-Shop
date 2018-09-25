@@ -1,0 +1,50 @@
+
+<app-breadcrum *ngIf="showBreadcrum" [pageHeader]="pageHeader" [pageText]="pageText"></app-breadcrum>
+
+<div class="our-recent-projects">    
+    
+    <div class="page-contents">
+        <div fxHide.xs class="spc-10"></div>
+
+        <div *ngIf="!showBreadcrum" class="category-header text-center">
+            <h1>Our Recent Projects</h1>
+        </div>
+        
+        <div class="spc-10"></div>
+      
+        <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center">
+    
+            <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+         
+            <div *ngFor="let project of activePageDataChunk" class="gallery text-center" fxFlex="33">
+                <mat-card mat-ripple routerLink="/project/{{ project.id }}">
+                    <img *ngIf="project?.avatar" mat-card-image [src]="getAvatarDetails(project?.avatar)" [alt]="project?.name">
+                    <mat-card-content class="desc text-center last-child">
+                        <h2>{{ project?.name }}</h2>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+             
+        </div>
+    
+        <!-- <mat-paginator [pageSizeOptions]="[1, 5, 10, 25, 100]"></mat-paginator> -->
+        <mat-paginator 
+            *ngIf="showBreadcrum"
+            [length]="length" 
+            [pageSize]="pageSize" 
+            [pageSizeOptions]="pageSizeOptions" 
+            (page)="onPageChanged($event)">
+        </mat-paginator>
+            
+        
+        <div class="actions">
+            <button *ngIf="!showBreadcrum" mat-raised-button color="primary" routerLink="/projects">
+                <span>View All Projects</span>
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+<app-footer *ngIf="showBreadcrum"></app-footer>

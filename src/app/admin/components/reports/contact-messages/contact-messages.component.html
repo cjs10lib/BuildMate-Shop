@@ -1,0 +1,76 @@
+
+<mat-card>
+
+  <div class="spc-20"></div>
+
+  <div fxLayout="row" fxLayout.xs="column" fxFlexAlign="center center">
+
+    <div fxFlex="24" fxFlexOrder.xs="1">
+      <div class="flex-details">
+        <h3>Filter by Name</h3>
+        <mat-form-field fxFlex.sm="style='font-size:10px;'">
+          <span matPrefix>
+            <mat-icon>search</mat-icon> &nbsp;
+          </span>
+          <input matInput #query (keyup)="search(query.value)" [(ngModel)]="searchQry" name="searchQuery" placeholder="Search Name...">
+          <button mat-button *ngIf="searchQry" matSuffix mat-icon-button aria-label="Clear" (click)="clearSearchField()">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+    
+    <div fxFlex fxFlexOrder.xs="2">
+      <div class="flex-details margin-20">
+
+        <mat-nav-list>
+          <mat-list-item *ngIf="filteredContacts?.length > 0">
+            <mat-divider></mat-divider>
+            <h3 matLine>  
+              <strong>                  
+                {{ filteredContacts?.length }} record(s) found.
+              </strong>
+            </h3>
+          </mat-list-item>
+
+          <div *ngIf="filteredContacts?.length < 1"> 
+            <p>
+              No record(s) found :(
+            </p>
+          </div>
+
+          <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+
+          <mat-list-item *ngFor="let contact of filteredContacts" (click)="contactDetails(contact)">
+            <mat-divider></mat-divider>
+            <img matListAvatar src="../../../../assets/avatars/avatar4.png" alt="...">
+            <h3 matLine> 
+              <strong>                  
+                {{ contact?.name }}              
+              </strong>
+            </h3>
+            <p matLine>
+              Subject -- <strong>{{ contact?.subject }}</strong> <br>  
+            </p>
+            <p matLine>
+              Contacts -- <strong>{{ contact?.phone }} <br> {{ contact?.email }}</strong>  
+            </p>
+
+            <button mat-icon-button>
+              <mat-icon *ngIf="!contact?.resolved" color="primary" matTooltip="New Message" matBadge="1" matBadgeColor="primary">search</mat-icon>
+              <mat-icon *ngIf="contact?.resolved" color="primary" matTooltip="Message has been read">done_all</mat-icon>              
+            </button>
+
+          </mat-list-item>
+        </mat-nav-list>
+
+        <ng-template #noImageAvatar>
+          <img matListAvatar src="../../../../assets/avatars/avatar4.png" alt="..."> &nbsp; &nbsp;
+        </ng-template>
+
+      </div>
+    </div>
+    
+  </div> 
+  
+</mat-card>

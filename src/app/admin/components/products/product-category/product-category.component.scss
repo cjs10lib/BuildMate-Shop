@@ -1,0 +1,14 @@
+// form field
+.form-field-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.form-field-container > * {
+    width: 100%;
+}
+
+mat-form-field {
+    margin: 7px;
+}

@@ -1,0 +1,85 @@
+
+<mat-card>
+
+
+  <form #f="ngForm">
+
+    <div class="spc-20"></div>
+    <h3 style="padding-bottom:0;"> Transaction Details</h3>
+
+    <mat-form-field appearance="outline">
+      <mat-select [(ngModel)]="remitOrderTransactionDetails.transactionType" name="transactionType" disabled required>
+        <mat-option>--Select Transaction Type--</mat-option>
+        <mat-option value="Cash">Cash</mat-option>
+        <mat-option value="Credit">Credit</mat-option>
+      </mat-select>
+      <mat-error>
+        Transaction type is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Amount Paid (Ghc)</mat-label>
+      <input type="number" matInput #amountPaid
+        [(ngModel)]="remitOrderTransactionDetails.amountPaid" 
+        name="amountPaid" placeholder="Enter Amount Paid" 
+        (ngModelChange)="getOutStandingPayment()">
+      <mat-icon matSuffix>moneytization_on</mat-icon>
+    </mat-form-field>
+
+    <div>
+      <p *ngIf="orderItemsMap.length > 0">
+        Outstanding Bill -- {{ getOutStandingPayment() }}
+      </p>
+    </div>
+
+    <mat-action-row>
+      <button mat-raised-button type="button" color="primary" (click)="remitOrder()" [disabled]="!f.valid || getOutStandingPayment() > 0">Remit Order</button>
+    </mat-action-row>
+  </form>
+
+
+  <!-- // order table -->
+
+  <p>You have {{ getTotalItemCount() }} item(s) in your cart.</p>
+
+  <div class="form-field-container mat-elevation-z8">
+          
+    <table mat-table [dataSource]="dataSource" matSort>
+               
+      <!-- Product Column -->
+      <ng-container matColumnDef="product">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Pattern </th>
+        <td mat-cell *matCellDef="let row"> {{ row.product }} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+  
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+        <td mat-cell *matCellDef="let row"> {{ row.quantity | number }} </td>
+        <td mat-footer-cell *matFooterCellDef> Total (GHC)</td>
+      </ng-container>
+
+      <!-- Total Price Column -->
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
+        <td mat-cell *matCellDef="let row"> {{row.total | number}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{ getTotalCost() | number }} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+    </table>
+
+    <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>      
+    
+  </div>
+
+  <ng-template #noImageAvatar>
+    <img matListAvatar class="product-img" src="../../../../assets/avatars/avatar3.png" alt="..."> &nbsp; &nbsp;
+  </ng-template>
+</mat-card>

@@ -1,0 +1,163 @@
+/* tool-bar */
+mat-toolbar {
+    height:  100px !important;
+    min-height: 100px !important;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
+}
+
+mat-toolbar mat-toolbar-row {
+    height: 100px !important;
+}
+
+.avatar-lg {
+    height: 50px; 
+    width: 50px; 
+    border-radius: 50%;
+    padding: 25px;
+}
+
+.avatar-sm {
+    height: 35px; 
+    width: 35px; 
+    border-radius: 50%;
+    padding: 0 15px;
+}
+
+.account-menu-lg {
+    padding-top: 30px;
+    font-size: 30px;
+    font-family: 'Catamaran'; 
+}
+
+.cart-lg {
+    margin-top: 27px;
+}
+
+.main-nav {
+
+    // padding: 50px;
+
+    .header-brand {
+        width: 100%;
+        text-align: center;
+    }
+
+    .cart-count {
+        text-align: right;
+    }
+
+    .nav-links {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .header-brand-lg {
+        font-family: 'Catamaran'; 
+        font-weight: 900;
+        font-size: 30px;
+        padding: 20px;
+        line-height: 100px;
+        color: whitesmoke;
+        text-transform: uppercase;
+        display: block;
+    }
+    
+    .nav-links-lg {
+        font-family: 'Catamaran'; 
+        font-size: 16px;
+        line-height: 100px;
+        color: whitesmoke;
+        text-transform: uppercase;
+        display: block;
+    }
+
+    .header-brand-sm {
+        font-family: 'Catamaran'; 
+        font-weight: 900;
+        font-size: 30px;
+        // padding: 20px;
+        color: whitesmoke;
+        text-transform: uppercase;
+    }
+
+    .nav-links-sm {
+        color: whitesmoke;
+    }
+
+    .mat-button {
+        span {
+            font-family: 'Catamaran'; 
+            font-size: 16px;
+            line-height: 100px;
+            color: whitesmoke;
+            text-transform: uppercase;
+        }
+    }
+}
+
+/* links */
+.activated-lg {
+    background: url(../../../../assets/banners/banner1.jpg); 
+    border-bottom: 5px solid #1c8adb;
+}
+
+.activated-sm {
+    border-bottom: 5px solid #1c8adb;
+}
+
+body {
+    background-color: #f3f3f3;
+}
+
+.footer {
+    height: 650px;
+    background: url(../../../../assets/banners/banner1.jpg);
+
+    .footer-contacts {
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    .branding {
+        position: static;
+        bottom: 0;
+        padding: 20px;
+        span {
+            padding: 20px;
+            color: whitesmoke;
+            font-family: 'Catamaran';  
+            font-size: 25px;
+            font-weight: 400;
+            background: url(../../../../assets/banners/banner1.jpg);
+        }
+    }
+   
+
+    .footer-notes {
+        padding: 30px;
+        height: 250px;
+        margin: 0;
+
+        h2 {
+            margin: 0;
+            color: whitesmoke;
+            font-family: 'Catamaran';  
+            font-size: 25px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+    
+        p {
+            font-family: 'Cormorant Garamond';  
+            font-weight: 200;
+            font-size: 22px;
+            color: whitesmoke;
+            line-height: 32px;
+            letter-spacing: 2px;
+        }
+    }
+
+}
