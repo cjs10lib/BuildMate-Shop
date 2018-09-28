@@ -14,7 +14,13 @@
       
         <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center">
     
-            <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+            <app-loading-spinner *ngIf="showSpinner && length > 0"></app-loading-spinner>
+
+            <div *ngIf="length === 0">
+                <h2 style="text-align:center;">
+                    😢 Sorry our recent projects are not uploaded at the moment! Please, kindly check back later.
+                </h2>
+            </div>
          
             <div *ngFor="let project of activePageDataChunk" class="gallery text-center" fxFlex="33">
                 <mat-card mat-ripple routerLink="/project/{{ project.id }}">
@@ -29,7 +35,7 @@
     
         <!-- <mat-paginator [pageSizeOptions]="[1, 5, 10, 25, 100]"></mat-paginator> -->
         <mat-paginator 
-            *ngIf="showBreadcrum"
+            *ngIf="showBreadcrum && length > 0"
             [length]="length" 
             [pageSize]="pageSize" 
             [pageSizeOptions]="pageSizeOptions" 

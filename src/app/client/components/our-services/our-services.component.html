@@ -10,10 +10,17 @@
         <div *ngIf="!showBreadcrum" class="category-header text-center">
             <h1>Our Services</h1>
         </div>
-    
+
+        
         <div class="spc-10"></div>
-    
+        
         <div fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center">
+
+            <div *ngIf="!(services$ | async)">
+                <h2 style="text-align:center;">
+                    😢 Sorry our services are not uploaded at the moment! Please, kindly check back later.
+                </h2>
+            </div>
     
             <div *ngFor="let service of services$ | async" fxFlex="33" class="gallery text-center">
                 <mat-card mat-ripple routerLink="/service/{{ service.id }}">

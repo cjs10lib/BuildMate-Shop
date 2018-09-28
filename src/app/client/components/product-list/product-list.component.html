@@ -5,13 +5,21 @@
 
   <div class="page-contents">
 
-    <mat-tab-group mat-stretch-tabs>
+    <div *ngIf="length === 0">
+      <h2 style="text-align:center;">
+        😢 Sorry our products are not uploaded at the moment! Please, kindly check back later.
+      </h2>
+    </div>
+
+    <mat-tab-group mat-stretch-tabs *ngIf="length > 0">
   
       <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon color="primary">verified_user</mat-icon> &nbsp;
           <h2>Products</h2>
         </ng-template>
+
+        
         
         <div class="products-list" fxLayout="row wrap" fxLayout.xs="column" fxLayoutAlign="center center" >
           <div *ngFor="let product of activePageDataChunk" class="product-block" fxFlex="32">
@@ -20,6 +28,7 @@
         </div>
 
         <mat-paginator 
+          *ngIf="length > 0"
           [length]="length" 
           [pageSize]="pageSize" 
           [pageSizeOptions]="pageSizeOptions" 

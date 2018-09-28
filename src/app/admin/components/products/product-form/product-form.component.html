@@ -77,7 +77,7 @@
             <mat-select [(ngModel)]="product.category" name="category" placeholder="Enter product category" required>
               <mat-option value=""></mat-option>
               <mat-option *ngFor="let category of categories$ | async" [value]="category.id">
-                {{ category.name }}
+                {{ category.category }}
               </mat-option>
             </mat-select>
             <mat-error>

@@ -3,7 +3,7 @@ export interface Staff {
     names?: string;
     nick?: string;
     gender?: string;
-    dob?: Date;
+    dob?: any;
     avatar?: string;
     contact?: Contact;
     created?: any;

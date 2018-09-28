@@ -29,7 +29,7 @@ export class ProductListComponent implements OnInit,  OnDestroy {
   datasource: Product[] = [];
   activePageDataChunk: Product[] = [];
 
-  length = 1000;
+  length = 0;
   pageSize = 6;
   pageSizeOptions: number[] = [6, 12, 24, 100];
 

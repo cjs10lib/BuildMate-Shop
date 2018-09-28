@@ -26,7 +26,7 @@ export class OurRecentProjectsComponent implements OnInit, OnDestroy {
   gallery: Upload[] = [];
 
   // MatPaginator Inputs
-  length = 1000;
+  length = 0;
   pageSize = 6;
   pageSizeOptions: number[] = [6, 12, 24, 100];
 
