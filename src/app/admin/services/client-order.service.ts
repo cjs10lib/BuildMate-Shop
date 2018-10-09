@@ -40,6 +40,19 @@ export class ClientOrderService {
     return this.orders;
   }
 
+  getOrdersByRange(TransactionDateRange) {
+
+    console.log(TransactionDateRange);
+
+    const startDate = this.timestampService.dateToTimestamp(TransactionDateRange.startDate);
+    const endDate = this.timestampService.dateToTimestamp(TransactionDateRange.endDate);
+
+    return this.db.collection('client-orders', ref => ref
+      .where('datePlaced', '>=', startDate)
+      .where('datePlaced', '<=', endDate))
+      .valueChanges();
+  }
+
   getPendingOrders() {
     return this.db.collection('client-orders', ref => ref
     .where('transactionDetails.transactionStatus', '==', 'PENDING')).valueChanges();

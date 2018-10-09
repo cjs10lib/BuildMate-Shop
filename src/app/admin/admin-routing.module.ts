@@ -1,3 +1,4 @@
+import { ReportsComponent } from './components/reports/reports.component';
 import { NewLoginComponent } from '@admin/auth/new-login/new-login.component';
 import { DashboardComponent } from '@admin/components/dashboard/dashboard.component';
 import { ManageStockComponent } from '@admin/components/products/manage-stock/manage-stock.component';
@@ -29,6 +30,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminLayoutComponent } from '@core/layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from '@core/layouts/auth-layout/auth-layout.component';
+import { SalesLogComponent } from '@admin/components/reports/sales-log/sales-log.component';
+import { PurchaseLogComponent } from '@admin/components/reports/purchase-log/purchase-log.component';
+import { StaffOrderLogComponent } from '@admin/components/reports/staff-order-log/staff-order-log.component';
 
 const routes: Routes = [
     {
@@ -126,6 +130,18 @@ const routes: Routes = [
         }, {
           path: 'client-orders',
           component: ClientOrdersComponent
+        }, {
+          path: 'reports',
+          component: ReportsComponent,
+          children: [
+            {
+              path: 'sales-log',
+              component: SalesLogComponent
+            }, {
+              path: 'purchase-log',
+              component: PurchaseLogComponent
+            }
+          ]
         }
       ]
     },

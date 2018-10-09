@@ -1,0 +1,124 @@
+
+<div class="spc-20"></div>
+
+<mat-card-actions>
+  <button mat-raised-button color="primary" mattooltip="Filter Sales-log" (click)="filterSalesLog()">
+    <mat-icon>filter_list</mat-icon> &nbsp;
+    <span>Filter Sales-log</span>    
+  </button>
+</mat-card-actions>
+
+<form #f="ngForm">
+
+  <mat-card *ngIf="showFilterForm">
+    <mat-card-content>
+
+      <div class="form-field-container" fxLayout="row" fxLayout="column" fxLayoutAlign="center center">
+
+        <mat-form-field>
+          <input matInput [matDatepicker]="startDate" [(ngModel)]="transactionDateRange.startDate" name="startDate" placeholder="Start date" (click)="startToggle" required disabled>
+          <mat-datepicker-toggle matSuffix [for]="startDate">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #startDate touchUi="true" disabled="false"></mat-datepicker>
+          <mat-hint align="end">Click toggle button to select date!</mat-hint>
+      
+          <mat-error>
+            Start date is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      
+        <mat-form-field>
+          <input matInput [matDatepicker]="endDate" [(ngModel)]="transactionDateRange.endDate" name="endDate" placeholder="End date" (click)="endDate" required disabled>
+          <mat-datepicker-toggle matSuffix [for]="endDate">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #endDate touchUi="true" disabled="false"></mat-datepicker>
+          <mat-hint align="end">Click toggle button to select date!</mat-hint>
+
+          <mat-error>
+            End date is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      
+      </div>  
+  
+    </mat-card-content>
+  
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="filterSales()" [disabled]="!f.valid">Filter Record</button>
+    </mat-card-actions>
+  </mat-card>
+
+</form>
+    
+<div class="spc-10"></div>
+
+<div class="mat-elevation-z8">
+
+  <mat-card-actions style="text-align:right;">
+    <button mat-raised-button color="primary" (click)="captureScreen()">Print Record</button>
+  </mat-card-actions>
+  
+  <div id="contentToConvert" class="content-to-convert">
+    <div class="spc-20"></div>
+    
+    <h2>Sale-Logs</h2>
+
+    <div class="spc-10"></div>
+
+    <table mat-table id="contentToConvert" [dataSource]="dataSource" matSort>
+          
+      <!-- Product Column -->
+      <ng-container matColumnDef="person">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Person </th>
+        <td mat-cell *matCellDef="let row"> {{ getPersonDetails(row.person) }} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+  
+      <!-- Product Column -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+        <td mat-cell *matCellDef="let row"> {{ row.datePlaced.toDate() | date: 'mediumDate' }} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+  
+      <!-- Product Column -->
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+        <td mat-cell *matCellDef="let row"> {{ row.transactionType }} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+  
+      <!-- Product Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+        <td mat-cell *matCellDef="let row"> {{ row.transactionStatus }} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+  
+      <!-- Quantity Column -->
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+        <td mat-cell *matCellDef="let row"> {{ row.quantity }} </td>
+        <!-- <td mat-footer-cell *matFooterCellDef> Total (GHC)</td> -->
+      </ng-container>
+      
+      <!-- <ng-container matColumnDef="balance">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Balance (Ghc) </th>
+        <td mat-cell *matCellDef="let row"> {{row.balance | number}} </td>
+        <td mat-footer-cell *matFooterCellDef> {{ getBalanceTotalCost() | number }} </td>
+      </ng-container> -->
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      <!-- <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr> -->
+    </table>
+  
+    <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+  
+    <mat-paginator [pageSizeOptions]="[25, 50, 100]"></mat-paginator>  
+  </div>  
+  
+</div> 
+

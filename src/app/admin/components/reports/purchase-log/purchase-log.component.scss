@@ -1,0 +1,28 @@
+.form-field-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field-container > * {
+    width: 100%;
+}
+
+mat-card-actions {
+    text-align: right;
+    padding: 10px;
+}
+
+mat-card-content .form-field-container mat-form-field {
+    margin: 7px;
+    width: 50%;
+}
+
+table {
+    width: 100%;
+}
+
+.content-to-convert {
+    h2 {
+       text-align: center;
+    }
+}

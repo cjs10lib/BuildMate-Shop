@@ -16,7 +16,7 @@
     
             <app-loading-spinner *ngIf="showSpinner && length > 0"></app-loading-spinner>
 
-            <div *ngIf="length === 0">
+            <div *ngIf="showBreadcrum && length === 0">
                 <h2 style="text-align:center;">
                     😢 Sorry our recent projects are not uploaded at the moment! Please, kindly check back later.
                 </h2>

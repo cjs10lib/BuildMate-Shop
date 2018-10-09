@@ -42,6 +42,10 @@ import { ProductFormComponent } from '@admin/components/products/product-form/pr
 import { ManageStockComponent } from '@admin/components/products/manage-stock/manage-stock.component';
 import { ProductRegistryComponent } from '@admin/components/products/product-registry/product-registry.component';
 import { ClientCheckOutComponent } from '@client/components/client-check-out/client-check-out.component';
+import { ReportsComponent } from '@admin/components/reports/reports.component';
+import { SalesLogComponent } from '@admin/components/reports/sales-log/sales-log.component';
+import { PurchaseLogComponent } from '@admin/components/reports/purchase-log/purchase-log.component';
+import { StaffOrderLogComponent } from '@admin/components/reports/staff-order-log/staff-order-log.component';
 
 const routes: Routes = [
   {
@@ -220,6 +224,18 @@ const routes: Routes = [
       }, {
         path: 'client-orders',
         component: ClientOrdersComponent
+      }, {
+        path: 'reports',
+        component: ReportsComponent,
+        children: [
+          {
+            path: 'sales-log',
+            component: SalesLogComponent
+          }, {
+            path: 'purchase-log',
+            component: PurchaseLogComponent
+          }
+        ]
       }
     ]
   },

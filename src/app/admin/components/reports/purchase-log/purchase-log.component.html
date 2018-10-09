@@ -1,0 +1,111 @@
+<div class="spc-20"></div>
+
+<mat-card-actions>
+  <button mat-raised-button color="primary" mattooltip="Filter Stock-log" (click)="filterStockLog()">
+    <mat-icon>filter_list</mat-icon> &nbsp;
+    <span>Filter Stock-log</span>    
+  </button>
+</mat-card-actions>
+
+<form #f="ngForm">
+
+  <mat-card *ngIf="showFilterForm">
+    <mat-card-content>
+
+      <div class="form-field-container" fxLayout="row" fxLayout="column" fxLayoutAlign="center center">
+
+        <mat-form-field>
+          <input matInput [matDatepicker]="startDate" [(ngModel)]="transactionDateRange.startDate" name="startDate" placeholder="Start date" (click)="startToggle" required disabled>
+          <mat-datepicker-toggle matSuffix [for]="startDate">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #startDate touchUi="true" disabled="false"></mat-datepicker>
+          <mat-hint align="end">Click toggle button to select date!</mat-hint>
+      
+          <mat-error>
+            Start date is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      
+        <mat-form-field>
+          <input matInput [matDatepicker]="endDate" [(ngModel)]="transactionDateRange.endDate" name="endDate" placeholder="End date" (click)="endDate" required disabled>
+          <mat-datepicker-toggle matSuffix [for]="endDate">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #endDate touchUi="true" disabled="false"></mat-datepicker>
+          <mat-hint align="end">Click toggle button to select date!</mat-hint>
+
+          <mat-error>
+            End date is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      
+      </div>  
+  
+    </mat-card-content>
+  
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="filterStockLog()" [disabled]="!f.valid">Filter Record</button>
+    </mat-card-actions>
+  </mat-card>
+
+</form>
+    
+<div class="spc-10"></div>
+
+<div class="mat-elevation-z8">
+
+  <mat-card-actions style="text-align:right;">
+    <button mat-raised-button color="primary" *ngIf="stockMap.length > 0" (click)="captureScreen()">Print Record</button>
+  </mat-card-actions>
+
+  <div id="contentToConvert" class="content-to-convert">
+    <div class="spc-20"></div>
+    
+    <h2>Product-Order-Logs</h2>
+
+    <div class="spc-10"></div>
+
+    <table mat-table [dataSource]="dataSource" matSort>
+          
+      <!-- Product Column -->
+      <ng-container matColumnDef="created">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+        <td mat-cell *matCellDef="let row"> {{ row.created.toDate() | date: 'mediumDate' }} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+  
+      <!-- Product Column -->
+      <ng-container matColumnDef="supplied">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Supplied Date </th>
+        <!-- <td mat-cell *matCellDef="let row"> {{ row.supplied }} </td> -->
+        <td mat-cell *matCellDef="let row"> {{ row.supplied.toDate() | date: 'mediumDate' }} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+  
+      <!-- Product Column -->
+      <ng-container matColumnDef="product">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Product </th>
+        <td mat-cell *matCellDef="let row"> {{ getProductDetails(row.product) }} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+  
+      <!-- Product Column -->
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </th>
+        <td mat-cell *matCellDef="let row"> {{ row.quantity }} </td>
+        <td mat-footer-cell *matFooterCellDef></td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;">
+      <!-- <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr> -->
+    </table>
+  
+    <app-loading-spinner *ngIf="showSpinner"></app-loading-spinner>
+  
+    <mat-paginator [pageSizeOptions]="[25, 50, 100]"></mat-paginator>  
+  </div>
+
+  
+</div> 
