@@ -65,6 +65,15 @@ export class NewStockService {
     );
   }
 
+  getStockTransactionByDateQuery(transactionDate): Observable<ProductStock[]> {
+    const startDate = new Date(transactionDate.startDate);
+    const endDate = new Date(transactionDate.endDate);
+
+    return this.db.collection('new-stocks', ref => ref
+      .where('supplied', '>=', startDate)
+      .where('supplied', '<=', endDate)).valueChanges();
+  }
+
   getStocksById(stockId: string) {
     return this.db.doc(`new-stocks/${stockId}`).valueChanges();
   }

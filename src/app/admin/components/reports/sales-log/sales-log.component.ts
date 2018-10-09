@@ -23,7 +23,7 @@ export class SalesLogComponent implements OnInit, OnDestroy {
   showFilterForm = false;
 
   transactionDateRange = {
-    startDate: Date(),
+    startDate: new Date().setDate(1),
     endDate: Date()
   };
 
@@ -40,18 +40,31 @@ export class SalesLogComponent implements OnInit, OnDestroy {
 
   showSpinner = true;
   staffSubscription: Subscription;
+  orderSubscription: Subscription;
+
   constructor(private staffService: StaffService,
               private clientAccountService: ClientAccountService,
               private clientOrderService: ClientOrderService,
               private staffOrderService: OrderService) { }
 
   ngOnInit() {
-    this.filterSales();
+    this.staffSubscription = this.staffService.getStaffs().pipe(concatMap(staffs => {
+      this.showSpinner = false;
+      this.staffs = staffs;
+
+      return this.clientAccountService.getClients();
+    })).subscribe(clients => {
+      this.clients = clients;
+    });
   }
 
   ngOnDestroy(): void {
     if (this.staffSubscription) {
       this.staffSubscription.unsubscribe();
+    }
+
+    if (this.orderSubscription) {
+      this.orderSubscription.unsubscribe();
     }
   }
 
@@ -60,20 +73,10 @@ export class SalesLogComponent implements OnInit, OnDestroy {
   }
 
   filterSales() {
-    return this.staffSubscription = this.staffService.getStaffs().pipe(concatMap(staffs => {
-      this.showSpinner = false;
-      this.staffs = staffs;
-
-      return this.clientAccountService.getClients();
-    })).pipe(concatMap(clients => {
-      this.clients = clients;
-
-      // return this.staffOrderService.getOrders();
-      return combineLatest(
-        this.staffOrderService.getOrdersByRange(this.transactionDateRange),
-        this.clientOrderService.getOrdersByRange(this.transactionDateRange)
-      );
-    })).subscribe(([staffOrders, clientOrders]) => {
+    this.orderSubscription = combineLatest(
+      this.staffOrderService.getOrdersByRange(this.transactionDateRange),
+      this.clientOrderService.getOrdersByRange(this.transactionDateRange)
+    ).subscribe(([staffOrders, clientOrders]) => {
 
       const orders: Order[] = staffOrders.concat(clientOrders);
 
@@ -90,8 +93,9 @@ export class SalesLogComponent implements OnInit, OnDestroy {
       this.dataSource = new MatTableDataSource(this.orderMap);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-
     });
+
+    this.filterSalesLog();
   }
 
   captureScreen() {

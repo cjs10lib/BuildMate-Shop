@@ -46,8 +46,8 @@ export class OrderService {
 
     console.log(TransactionDateRange);
 
-    const startDate = this.timestampService.dateToTimestamp(TransactionDateRange.startDate);
-    const endDate = this.timestampService.dateToTimestamp(TransactionDateRange.endDate);
+    const startDate = new Date(TransactionDateRange.startDate);
+    const endDate = new Date(TransactionDateRange.endDate);
 
     return this.db.collection('staff-orders', ref => ref
       .where('datePlaced', '>=', startDate)

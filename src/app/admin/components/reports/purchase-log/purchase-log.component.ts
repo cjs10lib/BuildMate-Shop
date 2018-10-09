@@ -19,7 +19,7 @@ export class PurchaseLogComponent implements OnInit, OnDestroy {
   showFilterForm = false;
 
   transactionDateRange = {
-    startDate: Date(),
+    startDate: new Date().setDate(1),
     endDate: Date()
   };
 
@@ -34,18 +34,28 @@ export class PurchaseLogComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
 
   showSpinner = true;
-  subscription: Subscription;
+  productSubscription: Subscription;
+  stockSubscription: Subscription;
 
   constructor(private productService: ProductService, private productStockService: NewStockService) { }
 
   ngOnInit() {
+    this.productSubscription = this.productService.getProducts().subscribe(products => {
+      this.product = products;
+      this.showSpinner = false;
+    });
+
     this.filterStocks();
   }
 
   ngOnDestroy(): void {
-   if (this.subscription) {
-     this.subscription.unsubscribe();
-   }
+    if (this.productSubscription) {
+      this.productSubscription.unsubscribe();
+    }
+
+    if (this.stockSubscription) {
+      this.stockSubscription.unsubscribe();
+    }
   }
 
   filterStockLog() {
@@ -53,12 +63,8 @@ export class PurchaseLogComponent implements OnInit, OnDestroy {
   }
 
   filterStocks() {
-    this.subscription = this.productService.getProducts().pipe(concatMap(products => {
-      this.product = products;
-      this.showSpinner = false;
-
-      return this.productStockService.getStocks();
-    })).subscribe(stocks => {
+    this.stockSubscription = this.productStockService.getStockTransactionByDateQuery(this.transactionDateRange).subscribe(stocks => {
+      console.log(stocks);
 
       this.stockMap = stocks.map(s => {
         return {
@@ -72,8 +78,9 @@ export class PurchaseLogComponent implements OnInit, OnDestroy {
       this.dataSource = new MatTableDataSource(this.stockMap);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-
     });
+
+    this.filterStockLog();
   }
 
   getProductDetails(productId: string) {

@@ -7,6 +7,8 @@
   </button>
 </mat-card-actions>
 
+<pre>{{ f.value | json }}</pre>
+
 <form #f="ngForm">
 
   <mat-card *ngIf="showFilterForm">
@@ -45,7 +47,7 @@
     </mat-card-content>
   
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="filterStockLog()" [disabled]="!f.valid">Filter Record</button>
+      <button mat-raised-button color="primary" (click)="filterStocks()" [disabled]="!transactionDateRange">Filter Record</button>
     </mat-card-actions>
   </mat-card>
 
@@ -60,7 +62,7 @@
   </mat-card-actions>
 
   <div id="contentToConvert" class="content-to-convert">
-    <div class="spc-20"></div>
+    <div class="spc-10"></div>
     
     <h2>Product-Order-Logs</h2>
 
