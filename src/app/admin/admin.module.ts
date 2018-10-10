@@ -48,6 +48,7 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { SalesLogComponent } from './components/reports/sales-log/sales-log.component';
 import { PurchaseLogComponent } from './components/reports/purchase-log/purchase-log.component';
 import { StaffOrderLogComponent } from './components/reports/staff-order-log/staff-order-log.component';
+import { InvoiceComponent } from './components/reports/invoice/invoice.component';
 
 @NgModule({
   imports: [
@@ -112,6 +113,7 @@ import { StaffOrderLogComponent } from './components/reports/staff-order-log/sta
     SalesLogComponent,
     PurchaseLogComponent,
     StaffOrderLogComponent,
+    InvoiceComponent,
   ],
   exports: [
     // DashboardModule,

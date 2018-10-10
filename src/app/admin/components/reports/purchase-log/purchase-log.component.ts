@@ -64,8 +64,7 @@ export class PurchaseLogComponent implements OnInit, OnDestroy {
 
   filterStocks() {
     this.stockSubscription = this.productStockService.getStockTransactionByDateQuery(this.transactionDateRange).subscribe(stocks => {
-      console.log(stocks);
-
+      
       this.stockMap = stocks.map(s => {
         return {
           created: s.created,

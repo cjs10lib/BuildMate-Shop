@@ -1,0 +1,50 @@
+
+.invoice-container {
+    padding: 64px;
+}
+
+
+.card {
+    max-width: 1020px;
+    padding: 64px 0 64px 88px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 4px 5px -2px rgba(0,0,0,.2), 0 7px 10px 1px rgba(0,0,0,.14), 0 2px 16px 1px rgba(0,0,0,.12);
+
+    .invoice-number {
+        padding-bottom: 10px;
+
+        .invoice {
+            font-size: 20px;
+        }
+    }
+}
+
+.invoice-date {
+    margin-bottom: 20px;
+}
+
+.issuer-accent {
+    padding: 50px;
+    display: inline-block;
+    color: whitesmoke;
+    background: url(../../../../../assets/banners/banner1.jpg);
+}
+
+.invoice-items {
+   padding-right: 88px;
+}
+
+.issuer-name {
+    font-size: 30px;
+    display: block;
+}
+
+table {
+    width: 100%;
+}
+
+.payment-details mat-list-item {
+    font-size: 14px;
+}
+

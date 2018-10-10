@@ -42,6 +42,10 @@ export class OrderService {
     return this.orders;
   }
 
+  getOrdersById(orderId: string): Observable<Order> {
+    return this.db.doc(`staff-orders/${orderId}`).valueChanges();
+  }
+
   getOrdersByRange(TransactionDateRange) {
 
     console.log(TransactionDateRange);

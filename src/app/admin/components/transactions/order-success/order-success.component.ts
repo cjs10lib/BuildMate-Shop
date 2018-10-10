@@ -1,5 +1,5 @@
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-order-success',
@@ -8,12 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderSuccessComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  orderId: string;
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    setTimeout(() => {
-      this.router.navigate(['account', 'pos']);
-    }, 6000);
+    this.orderId = this.route.snapshot.paramMap.get('id');
   }
-
 }

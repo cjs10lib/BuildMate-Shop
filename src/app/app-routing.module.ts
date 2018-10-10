@@ -1,3 +1,4 @@
+import { InvoiceComponent } from './admin/components/reports/invoice/invoice.component';
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -143,6 +144,10 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     canActivate: [AuthGuard],
     children: [
+      {
+        path: 'invoice',
+        component: InvoiceComponent
+      },
       {
         path: 'dashboard',
         component: DashboardComponent,
