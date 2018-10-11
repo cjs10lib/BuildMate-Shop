@@ -1,3 +1,4 @@
+import { ClientOrderSuccessComponent } from '@admin/components/reports/client-order-success/client-order-success.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { GeneralLayoutComponent } from '@core/layouts/general-layout/general-layout.component';
@@ -12,7 +13,6 @@ import { ProductListComponent } from '@client/components/product-list/product-li
 import { ClientShoppingCartComponent } from '@client/components/client-shopping-cart/client-shopping-cart.component';
 import { ClientAuthGuard } from '@client/services/client-auth.guard';
 import { ClientCheckOutComponent } from '@client/components/client-check-out/client-check-out.component';
-import { ClientOrderSuccessComponent } from '@client/components/client-order-success/client-order-success.component';
 
 const routes: Routes = [
     {

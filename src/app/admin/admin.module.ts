@@ -1,3 +1,4 @@
+import { ClientOrderSuccessComponent } from '@admin/components/reports/client-order-success/client-order-success.component';
 import { AdminRoutingModule } from '@admin/admin-routing.module';
 import { AssignRoleComponent } from '@admin/auth/assign-role/assign-role.component';
 import { NewLoginComponent } from '@admin/auth/new-login/new-login.component';
@@ -48,7 +49,8 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { SalesLogComponent } from './components/reports/sales-log/sales-log.component';
 import { PurchaseLogComponent } from './components/reports/purchase-log/purchase-log.component';
 import { StaffOrderLogComponent } from './components/reports/staff-order-log/staff-order-log.component';
-import { InvoiceComponent } from './components/reports/invoice/invoice.component';
+import { StaffInvoiceComponent } from './components/reports/staff-invoice/staff-invoice.component';
+import { ClientInvoiceComponent } from './components/reports/client-invoice/client-invoice.component';
 
 @NgModule({
   imports: [
@@ -84,6 +86,7 @@ import { InvoiceComponent } from './components/reports/invoice/invoice.component
 
     // reports
     ClientOrdersComponent,
+    ClientOrderSuccessComponent,
     ContactMessagesComponent,
     ClientOrderDetailsComponent,
     ContactMessagesDetailsComponent,
@@ -113,7 +116,8 @@ import { InvoiceComponent } from './components/reports/invoice/invoice.component
     SalesLogComponent,
     PurchaseLogComponent,
     StaffOrderLogComponent,
-    InvoiceComponent,
+    StaffInvoiceComponent,
+    ClientInvoiceComponent,
   ],
   exports: [
     // DashboardModule,

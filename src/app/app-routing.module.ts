@@ -1,4 +1,4 @@
-import { InvoiceComponent } from './admin/components/reports/invoice/invoice.component';
+import { StaffInvoiceComponent } from './admin/components/reports/staff-invoice/staff-invoice.component';
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -23,7 +23,6 @@ import { ShoppingCartComponent } from '@admin/components/transactions/shopping-c
 import { StaffOrderRemitComponent } from '@admin/components/transactions/staff-order-remit/staff-order-remit.component';
 import { StaffTransactionLogComponent } from '@admin/components/transactions/staff-transaction-log/staff-transaction-log.component';
 import { NewLoginComponent } from '@admin/auth/new-login/new-login.component';
-import { ClientOrderSuccessComponent } from '@client/components/client-order-success/client-order-success.component';
 import { ClientShoppingCartComponent } from '@client/components/client-shopping-cart/client-shopping-cart.component';
 import { HomePageComponent } from '@client/components/home-page/home-page.component';
 import { OurContactsComponent } from '@client/components/our-contacts/our-contacts.component';
@@ -47,6 +46,8 @@ import { ReportsComponent } from '@admin/components/reports/reports.component';
 import { SalesLogComponent } from '@admin/components/reports/sales-log/sales-log.component';
 import { PurchaseLogComponent } from '@admin/components/reports/purchase-log/purchase-log.component';
 import { StaffOrderLogComponent } from '@admin/components/reports/staff-order-log/staff-order-log.component';
+import { ClientOrderSuccessComponent } from '@admin/components/reports/client-order-success/client-order-success.component';
+import { ClientOrderBookingSuccessComponent } from '@client/components/client-order-booking-success/client-order-booking-success.component';
 
 const routes: Routes = [
   {
@@ -122,7 +123,7 @@ const routes: Routes = [
         }
       }, {
         path: 'order-success/:id',
-        component: ClientOrderSuccessComponent,
+        component: ClientOrderBookingSuccessComponent,
         canActivate: [ClientAuthGuard],
         data: {
           title: 'Mellence Impressions | Order-Success',
@@ -146,7 +147,7 @@ const routes: Routes = [
     children: [
       {
         path: 'invoice',
-        component: InvoiceComponent
+        component: StaffInvoiceComponent
       },
       {
         path: 'dashboard',
@@ -226,6 +227,9 @@ const routes: Routes = [
       }, {
         path: 'contact-messages',
         component: ContactMessagesComponent
+      }, {
+        path: 'client-order-success/:id',
+        component: ClientOrderSuccessComponent
       }, {
         path: 'client-orders',
         component: ClientOrdersComponent

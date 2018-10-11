@@ -31,6 +31,10 @@ export class ClientAccountService {
     return this.clients;
   }
 
+  getClient(clientId: string): Observable<Client> {
+    return this.db.doc(`client-account/${clientId}`).valueChanges();
+  }
+
   addClient(client: Client[]) {
     const uid = client[0].uid;
     const clientData = client[0];

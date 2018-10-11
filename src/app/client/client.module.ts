@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { ClientRoutingModule } from '@client/client-routing.module';
 import { ClientCheckOutComponent } from '@client/components/client-check-out/client-check-out.component';
-import { ClientOrderSuccessComponent } from '@client/components/client-order-success/client-order-success.component';
 import { ClientShoppingCartComponent } from '@client/components/client-shopping-cart/client-shopping-cart.component';
 import { HomePageComponent } from '@client/components/home-page/home-page.component';
 import { OurContactsComponent } from '@client/components/our-contacts/our-contacts.component';
@@ -15,6 +14,7 @@ import { ServiceDetailsComponent } from '@client/components/service-details/serv
 import { WhyChooseUsComponent } from '@client/components/why-choose-us/why-choose-us.component';
 
 import { SharedModule } from './../shared/shared.module';
+import { ClientOrderBookingSuccessComponent } from './components/client-order-booking-success/client-order-booking-success.component';
 
 
 @NgModule({
@@ -24,7 +24,6 @@ import { SharedModule } from './../shared/shared.module';
   ],
   declarations: [
     ClientCheckOutComponent,
-    ClientOrderSuccessComponent,
     ClientShoppingCartComponent,
 
     HomePageComponent,
@@ -36,7 +35,8 @@ import { SharedModule } from './../shared/shared.module';
     ProductListComponent,
     ProjectDetailsComponent,
     ServiceDetailsComponent,
-    WhyChooseUsComponent
+    WhyChooseUsComponent,
+    ClientOrderBookingSuccessComponent
   ]
 })
 export class ClientModule { }

@@ -33,6 +33,7 @@ import { AuthLayoutComponent } from '@core/layouts/auth-layout/auth-layout.compo
 import { SalesLogComponent } from '@admin/components/reports/sales-log/sales-log.component';
 import { PurchaseLogComponent } from '@admin/components/reports/purchase-log/purchase-log.component';
 import { StaffOrderLogComponent } from '@admin/components/reports/staff-order-log/staff-order-log.component';
+import { ClientOrderSuccessComponent } from './components/reports/client-order-success/client-order-success.component';
 
 const routes: Routes = [
     {
@@ -127,6 +128,9 @@ const routes: Routes = [
         }, {
           path: 'contact-messages',
           component: ContactMessagesComponent
+        }, {
+          path: 'client-order-success/:id',
+          component: ClientOrderSuccessComponent
         }, {
           path: 'client-orders',
           component: ClientOrdersComponent

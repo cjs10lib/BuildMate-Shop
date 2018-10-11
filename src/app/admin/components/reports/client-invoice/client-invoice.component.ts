@@ -1,24 +1,25 @@
-import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
-import { Staff } from '@admin/models/staff.model';
+import { ClientOrderService } from '@admin/services/client-order.service';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Order } from '@shared/models/order.model';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { Subscription } from 'rxjs';
-import { concatMap } from 'rxjs/operators';
-import { OrderService } from '@admin/services/order.service';
-import { StaffService } from '@admin/services/staff.service';
 import * as html2canvas from 'html2canvas';
 import * as jspdf from 'jspdf';
+import { Subscription } from 'rxjs';
+import { concatMap } from 'rxjs/operators';
+
+import { Client } from './../../../../client/models/client.model';
+import { ClientAccountService } from './../../../../client/services/client-account.service';
 
 @Component({
-  selector: 'app-invoice',
-  templateUrl: './invoice.component.html',
-  styleUrls: ['./invoice.component.scss']
+  selector: 'app-client-invoice',
+  templateUrl: './client-invoice.component.html',
+  styleUrls: ['./client-invoice.component.scss']
 })
-export class InvoiceComponent implements OnInit, OnDestroy {
+export class ClientInvoiceComponent implements OnInit, OnDestroy {
 
-  @Input() orderId;
+  @Input() orderId: string;
 
-  staff: Staff = {};
+  client: Client = {};
 
   order = {} as Order;
   orderMap = [];
@@ -32,11 +33,11 @@ export class InvoiceComponent implements OnInit, OnDestroy {
   showSpinner = true;
   subscription: Subscription;
 
-  constructor(private orderService: OrderService, private staffService: StaffService) { }
+  constructor(private orderService: ClientOrderService, private clientService: ClientAccountService) { }
 
   ngOnInit() {
     if (this.orderId) {
-      this.subscription = this.orderService.getOrdersById(this.orderId).pipe(concatMap(order => {
+      this.subscription = this.orderService.getOrder(this.orderId).pipe(concatMap(order => {
         this.order = order;
         this.showSpinner = false;
 
@@ -56,9 +57,9 @@ export class InvoiceComponent implements OnInit, OnDestroy {
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
 
-        return this.staffService.getStaff(this.order.transactionDetails.person);
-      })).subscribe(staff => {
-        this.staff = staff;
+        return this.clientService.getClient(this.order.transactionDetails.person);
+      })).subscribe(client => {
+        this.client = client;
       });
     }
   }

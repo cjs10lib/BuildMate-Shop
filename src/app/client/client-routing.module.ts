@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { GeneralLayoutComponent } from '@core/layouts/general-layout/general-layout.component';
+import { RouterModule, Routes } from '@angular/router';
+import { ClientCheckOutComponent } from '@client/components/client-check-out/client-check-out.component';
+import { ClientShoppingCartComponent } from '@client/components/client-shopping-cart/client-shopping-cart.component';
 import { HomePageComponent } from '@client/components/home-page/home-page.component';
-import { ServiceDetailsComponent } from '@client/components/service-details/service-details.component';
-import { OurServicesComponent } from '@client/components/our-services/our-services.component';
 import { OurContactsComponent } from '@client/components/our-contacts/our-contacts.component';
-import { ProjectDetailsComponent } from '@client/components/project-details/project-details.component';
 import { OurRecentProjectsComponent } from '@client/components/our-recent-projects/our-recent-projects.component';
+import { OurServicesComponent } from '@client/components/our-services/our-services.component';
 import { ProductDetailsComponent } from '@client/components/product-details/product-details.component';
 import { ProductListComponent } from '@client/components/product-list/product-list.component';
-import { ClientShoppingCartComponent } from '@client/components/client-shopping-cart/client-shopping-cart.component';
+import { ProjectDetailsComponent } from '@client/components/project-details/project-details.component';
+import { ServiceDetailsComponent } from '@client/components/service-details/service-details.component';
 import { ClientAuthGuard } from '@client/services/client-auth.guard';
-import { ClientCheckOutComponent } from '@client/components/client-check-out/client-check-out.component';
-import { ClientOrderSuccessComponent } from '@client/components/client-order-success/client-order-success.component';
+import { GeneralLayoutComponent } from '@core/layouts/general-layout/general-layout.component';
+
+import {
+  ClientOrderBookingSuccessComponent,
+} from './components/client-order-booking-success/client-order-booking-success.component';
 
 const routes: Routes = [
     {
@@ -88,7 +91,7 @@ const routes: Routes = [
           }
         }, {
           path: 'order-success/:id',
-          component: ClientOrderSuccessComponent,
+          component: ClientOrderBookingSuccessComponent,
           canActivate: [ClientAuthGuard],
           data: {
             title: 'Mellence Impressions | Order-Success',

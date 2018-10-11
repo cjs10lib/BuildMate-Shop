@@ -13,6 +13,7 @@ import { ClientAccountService } from '@client/services/client-account.service';
 import { ClientOrderRemitService } from '@admin/services/client-order-remit.service';
 import { ClientOrderService } from '@admin/services/client-order.service';
 import { ClientOrderDetailsComponent } from './../client-order-details/client-order-details.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-orders',
@@ -54,7 +55,8 @@ export class ClientOrdersComponent implements OnInit, OnDestroy {
               private breakpointObserver: BreakpointObserver,
               private dialog: MatDialog,
               private clientOrderRemitService: ClientOrderRemitService,
-              private alertService: AlertService) {
+              private alertService: AlertService,
+              private router: Router) {
                 this.clientSubscription = this.clientAccountService.getClients().subscribe(clients => {
                   this.clients = clients;
                 });
@@ -122,12 +124,12 @@ export class ClientOrdersComponent implements OnInit, OnDestroy {
       }
     }).afterClosed().pipe(take(1)).subscribe(async orders => {
       if (orders) {
-        console.log(orders);
         const confirm = await this.alertService.confirmUpdate();
         if (confirm.value) {
           await this.clientOrderRemitService.remitOrder(orders, orderId);
 
           this.alertService.afterUpdateSuccess();
+          this.router.navigate(['account', 'client-order-success', orderId]);
         }
 
       }
