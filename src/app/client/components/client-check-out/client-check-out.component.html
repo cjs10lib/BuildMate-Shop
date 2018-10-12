@@ -23,9 +23,9 @@
   
     <form #f="ngForm">   
   
-      <div *ngIf="!client?.phoneNumber">
+      <!-- <div *ngIf="!client?.phoneNumber"> -->
         Hello <strong>{{ client.displayName }}</strong>, <br> <br>
-        We noticed that you have not added your phone number to your information we collected from facebook. Kindly enter your primary contact phone number before proceeding. <br>
+        Kindly enter your primary contact phone number before proceeding. <br>
   
         <div class="spc-10"></div>
   
@@ -58,7 +58,7 @@
             Transaction type is <strong>required</strong>
           </mat-error>
         </mat-form-field>
-      </div>
+      <!-- </div> -->
  
       <div class="spc-10"></div> 
   

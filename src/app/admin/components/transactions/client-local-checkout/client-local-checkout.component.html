@@ -1,4 +1,3 @@
-
 <mat-card>
 
   <div class="spc-30"></div>
@@ -8,7 +7,7 @@
     <mat-tab>
       <ng-template mat-tab-label>
         <mat-icon color="primary">verified_user</mat-icon> &nbsp;
-        Check Out (Select Staff)
+        Check Out (Complete client required information)
       </ng-template>
     </mat-tab>
 
@@ -24,21 +23,28 @@
     <div class="form-field-container">
   
       <mat-form-field appearance="outline">
-        <mat-label>Select Staff</mat-label>
-        <input type="text" placeholder="Search..." aria-label="Number" matInput [formControl]="myControl" name="control" [matAutocomplete]="auto" [hidden]="myControl.value=='true'" required>
-        
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn.bind(this)">
-          <mat-option value="">--Select Staff--</mat-option>
-          <mat-divider></mat-divider>
-          <mat-option *ngFor="let p of filteredOptions | async" [value]="p.id">
-            {{p.names}}
-          </mat-option>
-        </mat-autocomplete>
-  
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="client.displayName" name="displayName" placeholder="Enter client surname, firstname & othernames" required>
+        <mat-icon matSuffix>person</mat-icon>
         <mat-error>
-          Product is <strong>required</strong>
+          Client name is <strong>required</strong>
         </mat-error>
-      </mat-form-field> 
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="client.email" name="email" placeholder="Enter client email">
+        <mat-icon matSuffix>mail</mat-icon>
+      </mat-form-field>
+  
+      <mat-form-field appearance="outline">
+        <mat-label>Phone</mat-label>
+        <input matInput [(ngModel)]="client.phoneNumber" name="phoneNumber" placeholder="Enter client phone number(s)" required>
+        <mat-icon matSuffix>phone</mat-icon>
+        <mat-error>
+          Client phone number is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
 
     </div>
 
@@ -46,11 +52,8 @@
     <h3 style="padding-bottom:0;"> Transaction Details</h3>
 
     <mat-form-field appearance="outline">
-      <mat-select [(ngModel)]="checkOutTransactionInfo.transactionType" name="transactionType" (ngModelChange)="transactionOnChange($event)" required>
-        <mat-option>--Select Transaction Type--</mat-option>
-        <mat-option value="Cash">Cash</mat-option>
-        <mat-option value="Credit">Credit</mat-option>
-      </mat-select>
+      <mat-label>Transaction Type</mat-label>
+      <input matInput [(ngModel)]="checkOutTransactionInfo.transactionType" name="transactionType" disabled>
       <mat-error>
         Transaction type is <strong>required</strong>
       </mat-error>
@@ -59,8 +62,7 @@
     <mat-form-field appearance="outline">
       <mat-label>Amount Paid (Ghc)</mat-label>
       <input type="number" matInput [(ngModel)]="checkOutTransactionInfo.amountPaid" 
-        name="amountPaid" placeholder="Enter Amount Paid" 
-        [disabled]="checkOutTransactionInfo.transactionType === 'Credit' || !checkOutTransactionInfo.transactionType">
+        name="amountPaid" placeholder="Enter Amount Paid">
       <mat-icon matSuffix>moneytization_on</mat-icon>
     </mat-form-field>
 
@@ -71,7 +73,7 @@
     </div>
 
     <mat-action-row>
-      <button mat-raised-button type="button" color="primary" (click)="placeOrder()" [disabled]="!f.valid || cart.length < 1">Place Order</button>
+      <button mat-raised-button type="button" color="primary" (click)="placeOrder()" [disabled]="!f.valid || cart.length < 1 || getOutStandingPayment() !== 0">Place Order</button>
     </mat-action-row>
   </form>
   
@@ -97,5 +99,4 @@
     </mat-accordion>
 
 </mat-card>
-
 

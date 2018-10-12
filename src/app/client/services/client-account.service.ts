@@ -41,4 +41,8 @@ export class ClientAccountService {
 
     return this.db.doc(`client-account/${uid}`).set(clientData, { merge: true });
   }
+
+  async addClientLocally(client: Client) {
+    return await this.clientCol.add(client);
+  }
 }

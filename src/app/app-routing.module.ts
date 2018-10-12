@@ -48,6 +48,7 @@ import { PurchaseLogComponent } from '@admin/components/reports/purchase-log/pur
 import { StaffOrderLogComponent } from '@admin/components/reports/staff-order-log/staff-order-log.component';
 import { ClientOrderSuccessComponent } from '@admin/components/reports/client-order-success/client-order-success.component';
 import { ClientOrderBookingSuccessComponent } from '@client/components/client-order-booking-success/client-order-booking-success.component';
+import { ClientLocalCheckoutComponent } from '@admin/components/transactions/client-local-checkout/client-local-checkout.component';
 
 const routes: Routes = [
   {
@@ -146,10 +147,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'invoice',
-        component: StaffInvoiceComponent
-      },
-      {
         path: 'dashboard',
         component: DashboardComponent,
       }, {
@@ -218,6 +215,9 @@ const routes: Routes = [
       }, {
         path: 'shopping-cart',
         component: ShoppingCartComponent
+      }, {
+        path: 'client-local-check-out',
+        component: ClientLocalCheckoutComponent
       }, {
         path: 'check-out',
         component: CheckOutComponent

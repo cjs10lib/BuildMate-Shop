@@ -34,6 +34,7 @@ import { SalesLogComponent } from '@admin/components/reports/sales-log/sales-log
 import { PurchaseLogComponent } from '@admin/components/reports/purchase-log/purchase-log.component';
 import { StaffOrderLogComponent } from '@admin/components/reports/staff-order-log/staff-order-log.component';
 import { ClientOrderSuccessComponent } from './components/reports/client-order-success/client-order-success.component';
+import { ClientLocalCheckoutComponent } from './components/transactions/client-local-checkout/client-local-checkout.component';
 
 const routes: Routes = [
     {
@@ -119,6 +120,9 @@ const routes: Routes = [
         }, {
           path: 'shopping-cart',
           component: ShoppingCartComponent
+        }, {
+          path: 'client-local-check-out',
+          component: ClientLocalCheckoutComponent
         }, {
           path: 'check-out',
           component: CheckOutComponent

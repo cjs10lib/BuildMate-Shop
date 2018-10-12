@@ -51,6 +51,7 @@ import { PurchaseLogComponent } from './components/reports/purchase-log/purchase
 import { StaffOrderLogComponent } from './components/reports/staff-order-log/staff-order-log.component';
 import { StaffInvoiceComponent } from './components/reports/staff-invoice/staff-invoice.component';
 import { ClientInvoiceComponent } from './components/reports/client-invoice/client-invoice.component';
+import { ClientLocalCheckoutComponent } from './components/transactions/client-local-checkout/client-local-checkout.component';
 
 @NgModule({
   imports: [
@@ -118,6 +119,7 @@ import { ClientInvoiceComponent } from './components/reports/client-invoice/clie
     StaffOrderLogComponent,
     StaffInvoiceComponent,
     ClientInvoiceComponent,
+    ClientLocalCheckoutComponent,
   ],
   exports: [
     // DashboardModule,

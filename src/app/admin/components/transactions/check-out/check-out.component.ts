@@ -22,8 +22,6 @@ import { OrderService } from '@admin/services/order.service';
 })
 export class CheckOutComponent implements OnInit, OnDestroy {
 
-  hideControls = true;
-
   myControl = new FormControl;
 
   staffId: string;
@@ -69,7 +67,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     });
 
     const cart$ = await this.cartService.getCart();
-    cart$.subscribe(result => {
+    this.cartSubcription = cart$.subscribe(result => {
       this.getCartItemsTotalQTY(); // loads total QTY to check-out button
       this.cart = result;
     });

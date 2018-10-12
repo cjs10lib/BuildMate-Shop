@@ -53,7 +53,11 @@
     
   </div>
   <mat-card *ngIf="!hideControls" class="mat-elevation-z2">
-    <button *ngIf="cart.length > 0 " mat-raised-button color="primary" routerLink="/account/check-out">Check Out</button> &nbsp;
+    <mat-checkbox [(ngModel)]="isClientSales">Make Client Sales</mat-checkbox>
+
+    <div class="spc-10"></div>
+
+    <button *ngIf="cart.length > 0 " mat-raised-button color="primary" (click)="checkout()">Check Out</button> &nbsp;
     <button *ngIf="cart.length > 0" mat-button color="warn" (click)="clearCart()">Clear Transaction Cart</button>
   </mat-card>
 

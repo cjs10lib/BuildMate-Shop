@@ -1,0 +1,28 @@
+.stepper-div {
+    margin: 0 auto;
+}
+
+// form field
+.form-field-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field-container > * {
+    width: 100%;
+}
+
+mat-form-field {
+    margin: 7px;
+}
+
+//expansion panel
+.example-headers-align .mat-expansion-panel-header-title, 
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}

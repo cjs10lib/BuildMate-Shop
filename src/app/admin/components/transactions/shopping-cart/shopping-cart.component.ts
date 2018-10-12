@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Subscription } from 'rxjs';
@@ -17,7 +18,9 @@ import { ShoppingCartService } from '@admin/services/shopping-cart.service';
 })
 export class ShoppingCartComponent implements OnInit, OnDestroy {
 
-  @Input() hideControls;
+  @Input() hideControls = false;
+
+  isClientSales = false;
 
   cartMap = [];
   cart = [];
@@ -39,7 +42,8 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
   constructor(private cartService: ShoppingCartService,
               private productService: ProductService,
               private alertService: AlertService,
-              private uploadService: UploadService) { }
+              private uploadService: UploadService,
+              private router: Router) { }
 
   async ngOnInit() {
 
@@ -53,7 +57,6 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
       this.cartSubcription = (await this.cartService.getCart()).subscribe(cart => {
         this.cart = cart;
-        console.log(cart);
 
         this.cartMap = cart.map(c => {
           return {
@@ -116,6 +119,15 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
 
     const index = this.products.findIndex(p => p.id === productId);
     return this.products[index].pattern;
+  }
+
+  checkout() {
+    if (this.isClientSales) {
+      return this.router.navigate(['account', 'client-local-check-out']);
+    }
+
+    // else
+    return this.router.navigate(['account', 'check-out']);
   }
 
   async clearCart() {

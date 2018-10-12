@@ -25,7 +25,7 @@ export class RecentOrdersComponent implements OnInit, OnDestroy {
   staffs: Staff[] = [];
   clients: Client[] = [];
 
-  displayedColumns: string[] = ['date', 'person', 'transactionType', 'transactionStatus', 'paid', 'balance', 'remitStatus'];
+  displayedColumns: string[] = ['date', 'person', 'transactionType', 'transactionStatus', 'paid', 'balance'];
   dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -49,11 +49,11 @@ export class RecentOrdersComponent implements OnInit, OnDestroy {
 
     this.subscription.push(this.isHandset$.subscribe(isHandset => {
       if (isHandset) {
-        return this.displayedColumns = ['date', 'person', 'balance', 'remitStatus'];
+        return this.displayedColumns = ['date', 'person', 'balance'];
       }
 
       // else
-      return this.displayedColumns = ['date', 'person', 'transactionType', 'transactionStatus', 'paid', 'balance', 'remitStatus'];
+      return this.displayedColumns = ['date', 'person', 'transactionType', 'transactionStatus', 'paid', 'balance'];
     }));
 
     this.subscription.push(this.staffService.getStaffs().pipe(concatMap(staffs => {
